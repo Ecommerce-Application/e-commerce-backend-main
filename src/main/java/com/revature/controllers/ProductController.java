@@ -12,28 +12,28 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/prod")
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductService prodService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(ProductService prodService) {
+        this.prodService = prodService;
     }
 
     @Authorized
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
-        return ResponseEntity.ok(productService.findAll());
+        return ResponseEntity.ok(prodService.findAll());
     }
 
     @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
-        Optional<Product> optional = productService.findById(id);
+        Optional<Product> optional = prodService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(optional.get());
@@ -41,47 +41,85 @@ public class ProductController {
 
     @Authorized
     @PutMapping
-    public ResponseEntity<Product> upsert(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.save(product));
+    public ResponseEntity<Product> upsertProduct(@RequestBody Product prod) {
+        return ResponseEntity.ok(prodService.save(prod));
     }
 
     @Authorized
     @PatchMapping
-    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
-    	List<Product> productList = new ArrayList<Product>();
-    	
-    	for (int i = 0; i < metadata.size(); i++) {
-    		Optional<Product> optional = productService.findById(metadata.get(i).getId());
+    public ResponseEntity<List<Product>> purchaseProduct(@RequestBody List<ProductInfo> metadata) {
+        List<Product> prodList = new ArrayList<Product>();
 
-    		if(!optional.isPresent()) {
-    			return ResponseEntity.notFound().build();
-    		}
+        for (int i = 0; i < metadata.size(); i++) {
+            Optional<Product> optional = prodService.findById(metadata.get(i).getId());
 
-    		Product product = optional.get();
+            if (!optional.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
 
-    		if(product.getQuantity() - metadata.get(i).getQuantity() < 0) {
-    			return ResponseEntity.badRequest().build();
-    		}
-    		
-    		product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
-    		productList.add(product);
-    	}
-        
-        productService.saveAll(productList, metadata);
+            Product prod = optional.get();
 
-        return ResponseEntity.ok(productList);
+            if (prod.getProdQuantity() - metadata.get(i).getQuantity() < 0) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            prod.setProdQuantity(prod.getProdQuantity() - metadata.get(i).getQuantity());
+            prodList.add(prod);
+        }
+
+        prodService.saveAll(prodList, metadata);
+
+        return ResponseEntity.ok(prodList);
     }
 
     @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
-        Optional<Product> optional = productService.findById(id);
+        Optional<Product> optional = prodService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        productService.delete(id);
+        prodService.delete(id);
 
         return ResponseEntity.ok(optional.get());
     }
+
+    //New Stuff
+
+    @Authorized
+    @GetMapping("/search")
+    public ResponseEntity<?> polyProductSearch(
+            @RequestParam(required = false, name = "tagQuery") final String tagQuery,
+            @RequestParam(required = false, name = "nameQuery") final String nameQuery,
+            @RequestParam(required = false, name = "imageQuery") final String imageQuery,
+            @RequestParam(required = false, name = "priceQuery") final double priceQuery
+    ) {
+
+        if (tagQuery != null) {
+            Optional<List<Product>> taggedProducts = prodService.findByDescription(tagQuery);
+            if(!taggedProducts.isPresent()) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(taggedProducts.get());
+
+        } else if (nameQuery != null ) {
+            Optional<List<Product>> namedProducts = prodService.findByName(nameQuery);
+            if(!namedProducts.isPresent()) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(namedProducts.get());
+
+        } else if (imageQuery != null ) {
+            Optional<List<Product>> imagedProducts = prodService.findByImage(imageQuery);
+            if(!imagedProducts.isPresent()) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(imagedProducts.get());
+
+        } else if (priceQuery != 0) {
+            //todo validation check for priceQuery, what does the DTO actually trasmit
+            Optional<List<Product>> pricedProducts = prodService.findByPrice(priceQuery);
+            if(!pricedProducts.isPresent()) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(pricedProducts.get());
+        }
+
+
+        return null;
+    }
+
 }

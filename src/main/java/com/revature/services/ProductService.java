@@ -5,6 +5,7 @@ import com.revature.models.Product;
 import com.revature.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +36,35 @@ public class ProductService {
 
     public void delete(int id) {
         productRepository.deleteById(id);
+    }
+
+    //Special requests, new stuff
+
+    //For loose-matched search function
+
+    public Optional<List<Product>> findByName(String name) {
+
+        return productRepository.findByName(name);
+    }
+    public Optional<List<Product>> findByDescription(String tagQuery) {
+        return productRepository.findByDescription(tagQuery);
+    }
+    public Optional<List<Product>> findByImage(String imageQuery) {
+        return productRepository.findByImage(imageQuery);
+    }
+    public Optional<List<Product>> findByPrice(double priceQuery) {
+        return productRepository.findByPrice(priceQuery);
+    }
+
+    public List<Product> searchByTag(String tagQuery) {
+        List<Product> taggedProducts = null;
+        List<Product> everything = productRepository.findAll();
+
+        for(Product i : everything){
+            if(i.getDescription().contains(tagQuery)) {
+                taggedProducts.add(i);
+            }
+        }
+        return taggedProducts;
     }
 }
