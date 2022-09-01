@@ -34,3 +34,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonarqube --info --stacktrace --debug --scan
+# Resources Used to Build this file are:
+# (1) - https://gitlab.com/revature_batches/2207-java-with-msa/-/blob/main/Week7/rolodex-api/README.md
+# (2) - Got to site: soundcloud.io --> Click on 'Administration' --> Click on 'Analysis Method' --> Click on 'GitHub Actions'
