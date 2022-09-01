@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 repositories {
@@ -40,4 +41,12 @@ publishing {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+sonarqube {
+  properties {
+    property 'sonar.host.url', 'https://sonarcloud.io'
+    property 'sonar.organization', 'Ecommerce-Application'
+    property 'sonar.projectKey', 'Ecommerce-Application_e-commerce-backend-main'
+  }
 }
