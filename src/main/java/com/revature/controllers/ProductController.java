@@ -22,13 +22,13 @@ public class ProductController {
         this.prodService = prodService;
     }
 
-    @Authorized
+//    @Authorized
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
         return ResponseEntity.ok(prodService.findAll());
     }
 
-    @Authorized
+//    @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
         Optional<Product> optional = prodService.findById(id);
@@ -39,13 +39,13 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
-    @Authorized
+//    @Authorized
     @PutMapping
     public ResponseEntity<Product> upsertProduct(@RequestBody Product prod) {
         return ResponseEntity.ok(prodService.save(prod));
     }
 
-    @Authorized
+//    @Authorized
     @PatchMapping
     public ResponseEntity<List<Product>> purchaseProduct(@RequestBody List<ProductInfo> metadata) {
         List<Product> prodList = new ArrayList<Product>();
@@ -72,7 +72,7 @@ public class ProductController {
         return ResponseEntity.ok(prodList);
     }
 
-    @Authorized
+//    @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
         Optional<Product> optional = prodService.findById(id);
@@ -87,7 +87,7 @@ public class ProductController {
 
     //New Stuff
 
-    @Authorized
+//    @Authorized
     @GetMapping("/search")
     public ResponseEntity<?> polyProductSearch(
             @RequestParam(required = false, name = "tagQuery") final String tagQuery,
