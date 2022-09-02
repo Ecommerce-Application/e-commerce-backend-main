@@ -61,7 +61,7 @@ public class ProductService {
         List<Product> everything = productRepository.findAll();
 
         for(Product i : everything){
-            if(i.getDescription().contains(tagQuery)) {
+            if(i.getProdDesc().contains(tagQuery)) {
                 taggedProducts.add(i);
             }
         }
