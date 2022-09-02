@@ -7,6 +7,7 @@ plugins {
     id 'maven-publish'
     id "org.sonarqube" version "3.4.0.2513"
     id "org.springframework.boot" version "2.7.3"
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 }
 
 repositories {
@@ -27,6 +28,14 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql:42.3.4'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
     implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.3'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.springframework.boot:spring-boot-devtools:2.7.3'
+    implementation 'org.modelmapper:modelmapper:3.1.0'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.1'
 }
 
 group = 'com.revature'

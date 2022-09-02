@@ -4,10 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Data
 @Entity
+@Table(name = "products")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
@@ -20,4 +28,7 @@ public class Product {
     private String prodDesc;
     private String prodImage;
     private String prodName;
+
+    @OneToMany(mappedBy = "productId")
+    private List<OrderQuantityBought> quantityBoughts;
 }
