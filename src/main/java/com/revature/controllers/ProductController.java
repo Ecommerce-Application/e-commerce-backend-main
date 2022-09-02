@@ -90,36 +90,34 @@ public class ProductController {
 //    @Authorized
     @GetMapping("/search")
     public ResponseEntity<?> polyProductSearch(
-            @RequestParam(required = false, name = "tagQuery") final String tagQuery,
+            @RequestParam(required = false, name = "descQuery") final String descQuery,
             @RequestParam(required = false, name = "nameQuery") final String nameQuery,
             @RequestParam(required = false, name = "imageQuery") final String imageQuery,
-            @RequestParam(required = false, name = "priceQuery") final double priceQuery
+            @RequestParam(required = false, name = "priceQuery") final String priceQuery
     ) {
 
-        if (tagQuery != null) {
-            Optional<List<Product>> taggedProducts = prodService.findByDescription(tagQuery);
+        if (!descQuery.equals("")) {
+            Optional<List<Product>> taggedProducts = prodService.findByDescription(descQuery);
             if(!taggedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(taggedProducts.get());
 
-        } else if (nameQuery != null ) {
+        } else if (!nameQuery.equals("")) {
             Optional<List<Product>> namedProducts = prodService.findByName(nameQuery);
             if(!namedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(namedProducts.get());
 
-        } else if (imageQuery != null ) {
+        } else if (!imageQuery.equals("")) {
             Optional<List<Product>> imagedProducts = prodService.findByImage(imageQuery);
             if(!imagedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(imagedProducts.get());
 
-        } else if (priceQuery != 0) {
+        } else if (!priceQuery.equals("")) {
             //todo validation check for priceQuery, what does the DTO actually trasmit
-            Optional<List<Product>> pricedProducts = prodService.findByPrice(priceQuery);
+            double locPriceQuery = Double.parseDouble(priceQuery);
+            Optional<List<Product>> pricedProducts = (prodService.findByPrice(locPriceQuery));
             if(!pricedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(pricedProducts.get());
         }
-
-
         return null;
     }
-
 }

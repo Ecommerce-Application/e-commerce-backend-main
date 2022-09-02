@@ -44,16 +44,16 @@ public class ProductService {
 
     public Optional<List<Product>> findByName(String name) {
 
-        return productRepository.findByName(name);
+        return productRepository.findByProdName(name);
     }
     public Optional<List<Product>> findByDescription(String tagQuery) {
-        return productRepository.findByDescription(tagQuery);
+        return productRepository.findByprodDesc(tagQuery);
     }
     public Optional<List<Product>> findByImage(String imageQuery) {
-        return productRepository.findByImage(imageQuery);
+        return productRepository.findByprodImage(imageQuery);
     }
     public Optional<List<Product>> findByPrice(double priceQuery) {
-        return productRepository.findByPrice(priceQuery);
+        return productRepository.findByprodPrice(priceQuery);
     }
 
     public List<Product> searchByTag(String tagQuery) {
