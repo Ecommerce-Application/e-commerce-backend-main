@@ -7,21 +7,20 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @Entity
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
-public class Product {
 
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int quantity;
-    private double price;
-    private String description;
-    private String image;
-    private String name;
+    private int orderId;
 
-    @OneToMany(mappedBy = "product_id")
-    private List<OrderQuantityBought> quantityBoughts;
+    private int userId;
+    private double total;
+    private long datePlaced;
+
+    @OneToMany(mappedBy = "order_id")
+    private List<OrderQuantityBought> orderQuantityBoughts;
 }
