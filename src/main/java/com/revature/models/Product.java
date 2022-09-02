@@ -22,8 +22,6 @@ public class Product {
     private String prodName;
 
     //Explicit constructor
-
-
     public Product(int prodQuantity, double prodPrice, String prodDesc, String prodImage, String prodName) {
         this.prodQuantity = prodQuantity;
         this.prodPrice = prodPrice;

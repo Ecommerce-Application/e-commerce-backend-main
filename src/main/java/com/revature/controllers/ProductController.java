@@ -85,8 +85,6 @@ public class ProductController {
         return ResponseEntity.ok(optional.get());
     }
 
-    //New Stuff
-
 //    @Authorized
     @GetMapping("/search")
     public ResponseEntity<?> polyProductSearch(
@@ -96,22 +94,22 @@ public class ProductController {
             @RequestParam(required = false, name = "priceQuery") final String priceQuery
     ) {
 
-        if (!descQuery.equals("")) {
+        if (descQuery != null) {
             Optional<List<Product>> taggedProducts = prodService.findByDescription(descQuery);
             if(!taggedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(taggedProducts.get());
 
-        } else if (!nameQuery.equals("")) {
+        } else if (nameQuery != null) {
             Optional<List<Product>> namedProducts = prodService.findByName(nameQuery);
             if(!namedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(namedProducts.get());
 
-        } else if (!imageQuery.equals("")) {
+        } else if (imageQuery != null) {
             Optional<List<Product>> imagedProducts = prodService.findByImage(imageQuery);
             if(!imagedProducts.isPresent()) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(imagedProducts.get());
 
-        } else if (!priceQuery.equals("")) {
+        } else if (priceQuery != null) {
             //todo validation check for priceQuery, what does the DTO actually trasmit
             double locPriceQuery = Double.parseDouble(priceQuery);
             Optional<List<Product>> pricedProducts = (prodService.findByPrice(locPriceQuery));
