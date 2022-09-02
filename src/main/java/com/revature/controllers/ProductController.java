@@ -5,17 +5,17 @@ import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;​
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;​
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/prod")
 @CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
 public class ProductController {
 
-    private final ProductService prodService;​
+    private final ProductService prodService;
 
     public ProductController(ProductService prodService) {
         this.prodService = prodService;
