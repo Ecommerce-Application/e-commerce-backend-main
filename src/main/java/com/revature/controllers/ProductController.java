@@ -110,7 +110,7 @@ public class ProductController {
             return ResponseEntity.ok(imagedProducts.get());
 
         } else if (priceQuery != null) {
-            //todo validation check for priceQuery, what does the DTO actually trasmit
+            //todo validation check for priceQuery, what does the DTO actually transmit
             double locPriceQuery = Double.parseDouble(priceQuery);
             Optional<List<Product>> pricedProducts = (prodService.findByPrice(locPriceQuery));
             if(!pricedProducts.isPresent()) return ResponseEntity.notFound().build();
