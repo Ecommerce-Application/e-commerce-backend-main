@@ -5,18 +5,17 @@ import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.*;​
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional;​
 
 @RestController
 @RequestMapping("/api/prod")
 @CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
 public class ProductController {
 
-    private final ProductService prodService;
+    private final ProductService prodService;​
 
     public ProductController(ProductService prodService) {
         this.prodService = prodService;
@@ -84,17 +83,18 @@ public class ProductController {
 
         return ResponseEntity.ok(optional.get());
     }
+    // New Stuff
 
     // @Authorized
     @GetMapping("/search")
     public ResponseEntity<?> polyProductSearch(
-            @RequestParam(required = false, name = "descQuery") final String descQuery,
+            @RequestParam(required = false, name = "tagQuery") final String tagQuery,
             @RequestParam(required = false, name = "nameQuery") final String nameQuery,
             @RequestParam(required = false, name = "imageQuery") final String imageQuery,
-            @RequestParam(required = false, name = "priceQuery") final String priceQuery) {
+            @RequestParam(required = false, name = "priceQuery") final double priceQuery) {
 
-        if (descQuery != null) {
-            Optional<List<Product>> taggedProducts = prodService.findByDescription(descQuery);
+        if (tagQuery != null) {
+            Optional<List<Product>> taggedProducts = prodService.findByDescription(tagQuery);
             if (!taggedProducts.isPresent())
                 return ResponseEntity.notFound().build();
             return ResponseEntity.ok(taggedProducts.get());
@@ -111,14 +111,14 @@ public class ProductController {
                 return ResponseEntity.notFound().build();
             return ResponseEntity.ok(imagedProducts.get());
 
-        } else if (priceQuery != null) {
-            // todo validation check for priceQuery, what does the DTO actually transmit
-            double locPriceQuery = Double.parseDouble(priceQuery);
-            Optional<List<Product>> pricedProducts = (prodService.findByPrice(locPriceQuery));
+        } else if (priceQuery != 0) {
+            // todo validation check for priceQuery, what does the DTO actually trasmit
+            Optional<List<Product>> pricedProducts = prodService.findByPrice(priceQuery);
             if (!pricedProducts.isPresent())
                 return ResponseEntity.notFound().build();
             return ResponseEntity.ok(pricedProducts.get());
         }
+
         return null;
     }
 }
