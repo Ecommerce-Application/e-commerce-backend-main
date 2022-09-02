@@ -8,7 +8,7 @@ COPY build/libs/e-commerce-0.0.1-SNAPSHOT.jar e-commerce-0.0.1-SNAPSHOT.jar
 EXPOSE 5000
 
 # Run the JAR when we run the container, thus executing the app
-ENTRYPOINT["java", "-jar", "e-commerce-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "e-commerce-0.0.1-SNAPSHOT.jar"]
 
 # To build the image and run the container run these commands
 # within the root directory of the project
