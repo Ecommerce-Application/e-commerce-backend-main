@@ -7,7 +7,10 @@ plugins {
     id 'maven-publish'
     id "org.sonarqube" version "3.4.0.2513"
     id "org.springframework.boot" version "2.7.3"
+<<<<<<< HEAD
 
+=======
+>>>>>>> a4d472441f60ffe298410be441c00293285ad453
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 }
 
@@ -29,10 +32,18 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql:42.3.4'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
+<<<<<<< HEAD
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+=======
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.3'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.springframework.boot:spring-boot-devtools:2.7.3'
+>>>>>>> a4d472441f60ffe298410be441c00293285ad453
     implementation 'org.modelmapper:modelmapper:3.1.0'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1'

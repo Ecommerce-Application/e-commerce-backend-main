@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
 public class ProductController {
 
     private final ProductService productService;
@@ -22,29 +22,30 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @Authorized
+    // @Authorized
     @GetMapping
     public ResponseEntity<List<Product>> getInventory() {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    @Authorized
+    // @Authorized
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(optional.get());
     }
 
-    @Authorized
+    // @Authorized
     @PutMapping
     public ResponseEntity<Product> upsert(@RequestBody Product product) {
         return ResponseEntity.ok(productService.save(product));
     }
 
+<<<<<<< HEAD
 //    @Authorized
 //    @PatchMapping
 //    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) {
@@ -71,13 +72,41 @@ public class ProductController {
 //
 //        return ResponseEntity.ok(productList);
 //    }
+=======
+    // @Authorized
+    @PatchMapping
+    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) {
+        List<Product> productList = new ArrayList<Product>();
 
-    @Authorized
+        for (int i = 0; i < metadata.size(); i++) {
+            Optional<Product> optional = productService.findById(metadata.get(i).getId());
+
+            if (!optional.isPresent()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            Product product = optional.get();
+
+            if (product.getProdQuantity() - metadata.get(i).getQuantity() < 0) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            product.setProdQuantity(product.getProdQuantity() - metadata.get(i).getQuantity());
+            productList.add(product);
+        }
+
+        productService.saveAll(productList, metadata);
+
+        return ResponseEntity.ok(productList);
+    }
+>>>>>>> a4d472441f60ffe298410be441c00293285ad453
+
+    // @Authorized
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") int id) {
         Optional<Product> optional = productService.findById(id);
 
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         productService.delete(id);

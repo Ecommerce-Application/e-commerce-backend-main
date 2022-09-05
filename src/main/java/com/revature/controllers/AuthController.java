@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
 public class AuthController {
 
     private final AuthService authService;
@@ -42,6 +42,7 @@ public class AuthController {
 //        return ResponseEntity.ok().build();
 //    }
 
+<<<<<<< HEAD
 //    @PostMapping("/register")
 //    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
 //        User created = new User(0,
@@ -52,4 +53,34 @@ public class AuthController {
 //
 //        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
 //    }
+=======
+        if (!optional.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        session.setAttribute("user", optional.get());
+
+        return ResponseEntity.ok(optional.get());
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpSession session) {
+        session.removeAttribute("user");
+
+        return ResponseEntity.ok().build();
+    }
+
+    // @PostMapping("/register")
+    // public ResponseEntity<User> register(@RequestBody RegisterRequest
+    // registerRequest) {
+    // User created = new User(0,
+    // registerRequest.getEmail(),
+    // registerRequest.getPassword(),
+    // registerRequest.getFirstName(),
+    // registerRequest.getLastName());
+
+    // return
+    // ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
+    // }
+>>>>>>> a4d472441f60ffe298410be441c00293285ad453
 }
