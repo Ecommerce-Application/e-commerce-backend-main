@@ -1,0 +1,37 @@
+package com.revature.models;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
+
+import javax.persistence.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "images")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "picId")
+public class Image {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pic_id", nullable = false)
+    private int picId;
+
+    @Column(name = "pic_name")
+    private String picName;
+
+    @Column(name = "pic_type")
+    private String picType;
+
+    @Lob
+    @Column(name = "pic_byte")
+    private byte[] picByte;
+
+    // Many-To-One Relationships
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+}
