@@ -45,32 +45,32 @@ public class ProductController {
         return ResponseEntity.ok(productService.save(product));
     }
 
-    @Authorized
-    @PatchMapping
-    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) { 	
-    	List<Product> productList = new ArrayList<Product>();
-    	
-    	for (int i = 0; i < metadata.size(); i++) {
-    		Optional<Product> optional = productService.findById(metadata.get(i).getId());
-
-    		if(!optional.isPresent()) {
-    			return ResponseEntity.notFound().build();
-    		}
-
-    		Product product = optional.get();
-
-    		if(product.getQuantity() - metadata.get(i).getQuantity() < 0) {
-    			return ResponseEntity.badRequest().build();
-    		}
-    		
-    		product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
-    		productList.add(product);
-    	}
-        
-        productService.saveAll(productList, metadata);
-
-        return ResponseEntity.ok(productList);
-    }
+//    @Authorized
+//    @PatchMapping
+//    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) {
+//    	List<Product> productList = new ArrayList<Product>();
+//
+//    	for (int i = 0; i < metadata.size(); i++) {
+//    		Optional<Product> optional = productService.findById(metadata.get(i).getId());
+//
+//    		if(!optional.isPresent()) {
+//    			return ResponseEntity.notFound().build();
+//    		}
+//
+//    		Product product = optional.get();
+//
+//    		if(product.getQuantity() - metadata.get(i).getQuantity() < 0) {
+//    			return ResponseEntity.badRequest().build();
+//    		}
+//
+//    		product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
+//    		productList.add(product);
+//    	}
+//
+//        productService.saveAll(productList, metadata);
+//
+//        return ResponseEntity.ok(productList);
+//    }
 
     @Authorized
     @DeleteMapping("/{id}")

@@ -1,26 +1,33 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Data
 @Entity
+@Table(name="products")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "prod_id")
 public class Product {
 
     @Id
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int quantity;
-    private double price;
+    private int prod_id;
+
+    @Column
     private String description;
+
+    @Column
     private String image;
-    private String name;
+
+    @Column
+    private String prod_name;
+
+
 }

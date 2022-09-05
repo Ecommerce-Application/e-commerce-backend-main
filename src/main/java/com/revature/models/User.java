@@ -1,23 +1,57 @@
 package com.revature.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.List;
 
-@Data
 @Entity
+@Table(name="users")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "user_id")
 public class User {
 
     @Id
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
+    private int user_id;
+
+    @Column(nullable = false)
+    @Length(min = 1)
+    private String first_name;
+
+    @Column(nullable = false)
+    @Length(min = 1)
+    private String last_name;
+
+    @Column(nullable = false, unique = true)
+    @Email
+    private String user_email;
+
+    @Column(nullable = false)
+    @Length(min = 1)
+    private String user_password;
+
+    @Column
+    private String token_id;
+
+//    One-to-Many relationship
+    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Address> address_id;
+
+    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Payment> payment_id;
+
+
+    private int user_payment;
 }
