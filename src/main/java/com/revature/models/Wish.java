@@ -41,6 +41,7 @@ public class Wish {
         this.product = product;
     }
 
+
     // private String groupId;
     // private String groupName;
 }

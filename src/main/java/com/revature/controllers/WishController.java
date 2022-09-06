@@ -14,8 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -32,9 +34,23 @@ public class WishController {
     }
 
     @GetMapping("/get/{user_id}")
-    public ResponseEntity<List<Wish>> getWishesByUserId(@PathVariable("user_id") int userId) {
+    public ResponseEntity<List<Product>> getWishesByUserId(@PathVariable("user_id") int userId) {
+        System.out.println(userId + "First Print");
         List<Wish> wishes = new ArrayList<Wish>(wishService.getWishesByUserId(userId));
-        return ResponseEntity.ok(wishes);
+        List<Product> prodList = new ArrayList<Product>();
+        System.out.println(wishes.toString());
+        System.out.println(wishes.size());
+        for(int i = 0; i <= wishes.size() - 1; i++) {
+            Product item = wishes.get(i).getProduct();
+            System.out.println(item + "Second Print");
+//            Product p = productService.findById(item);
+//                    .orElseThrow( () ->
+//                    new ProductNotFoundException("No product with id " + item + " found."));
+            System.out.println(item + "Third Print");
+            prodList.add(item);
+        }
+        System.out.println(prodList);
+        return ResponseEntity.ok(prodList);
     }
 
     @PostMapping("/post/{user_id}/{prod_id}")
@@ -45,9 +61,13 @@ public class WishController {
 //        } catch(WishNotFoundException e) {
 //            return new ResponseEntity<Wish>(HttpStatus.NOT_FOUND);
 //        }
+        System.out.println(userId + "User ID");
+        System.out.println(prodId + "Prod ID");
         User user = userService.findByUserId(userId);
+        System.out.println(user + "Full user");
         Product product = productService.findById(prodId).orElseThrow( () ->
                 new ProductNotFoundException("No product with id " + prodId + " found."));
+        System.out.println(product + "Full product");
         return ResponseEntity.ok(wishService.addWish(user, product));
     }
 
