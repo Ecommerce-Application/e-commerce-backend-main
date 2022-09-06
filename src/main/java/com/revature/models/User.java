@@ -1,110 +1,66 @@
 package com.revature.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-<<<<<<< HEAD
-import java.util.List;
-=======
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
 
 @Entity
-<<<<<<< HEAD
-@Table(name="users")
+@Table(name = "users")
+@NoArgsConstructor
 @Getter
 @Setter
-=======
-@Table(name = "users")
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
-@NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "user_id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class User {
 
     @Id
-    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-    private int user_id;
-
-    @Column(nullable = false)
-    @Length(min = 1)
-    private String first_name;
-
-    @Column(nullable = false)
-    @Length(min = 1)
-    private String last_name;
-
-    @Column(nullable = false, unique = true)
-    @Email
-    private String user_email;
-
-    @Column(nullable = false)
-    @Length(min = 1)
-    private String user_password;
-
-    @Column
-    private String token_id;
-
-//    One-to-Many relationship
-    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<Address> address_id;
-
-    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<Payment> payment_id;
-
-
-    private int user_payment;
-=======
+    @Column(name = "user_id", nullable = false)
     private int userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true, name = "user_email")
     @Email
     private String userEmail;
 
-    @Column(nullable = false)
+    @Column(name = "user_password")
     @NotBlank
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
     private String userPassword;
 
-    @Column(nullable = false)
+    @Column(name = "first_name")
     @Length(min = 2)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name")
     @Length(min = 2)
     private String lastName;
 
-    @Column
+    @Column(name = "token_id")
     private String tokenId;
 
-    // private int userPayment;
 
-    // One-To-Many Relationships
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+// One-To-Many Relationships
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
-    private List<Address> addressId;
+    private List<Image> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
-    private List<Payment> paymentId;
+    private List<Address> addresses = new ArrayList<>();
 
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Payment> payments = new ArrayList<>();
 }
