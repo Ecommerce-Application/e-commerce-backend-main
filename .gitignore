@@ -33,7 +33,11 @@ build/
 .vscode/
 
 ### The RIV Gradle Special ###
+gradle/
 /gradle/
+.gradle/
+/.gradle/
+
 
 ### Application.Properties ###
 ### application.properties 
