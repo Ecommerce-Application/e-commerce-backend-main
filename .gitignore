@@ -33,10 +33,4 @@ build/
 .vscode/
 
 ### Application.Properties ###
-### application.properties ###
-
-### RIV Gradle Build Issues ###
-/gradle/
-.gradle/7.5.1/checksums/checksums.lock
-.gradle/7.5.1/checksums/md5-checksums.bin
-.gradle/7.5.1/checksums/sha1-checksums.bin
+### application.properties 
