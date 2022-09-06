@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -26,12 +27,13 @@ public class Image {
     private String picType;
 
     @Lob
-    @Column(name = "pic_byte")
+    @Column(name = "pic_byte", length = 1000)
     private byte[] picByte;
 
     // Many-To-One Relationships
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
 }
