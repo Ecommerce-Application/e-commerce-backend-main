@@ -8,6 +8,7 @@ import com.revature.models.Wish;
 import com.revature.services.ProductService;
 import com.revature.services.UserService;
 import com.revature.services.WishService;
+import com.revature.util.JwtTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,31 +26,29 @@ import java.util.Optional;
 public class WishController {
 
     private WishService wishService;
+    private JwtTokenManager tokenManager;
     private UserService userService;
     private ProductService productService;
 
     @Autowired
-    public WishController(WishService wishService) {
+    public WishController(WishService wishService, JwtTokenManager tokenManager, UserService userService,
+                          ProductService productService) {
         this.wishService = wishService;
+        this.tokenManager = tokenManager;
+        this.userService = userService;
+        this.productService = productService;
     }
+
+
 
     @GetMapping("/get/{user_id}")
     public ResponseEntity<List<Product>> getWishesByUserId(@PathVariable("user_id") int userId) {
-        System.out.println(userId + "First Print");
         List<Wish> wishes = new ArrayList<Wish>(wishService.getWishesByUserId(userId));
         List<Product> prodList = new ArrayList<Product>();
-        System.out.println(wishes.toString());
-        System.out.println(wishes.size());
         for(int i = 0; i <= wishes.size() - 1; i++) {
             Product item = wishes.get(i).getProduct();
-            System.out.println(item + "Second Print");
-//            Product p = productService.findById(item);
-//                    .orElseThrow( () ->
-//                    new ProductNotFoundException("No product with id " + item + " found."));
-            System.out.println(item + "Third Print");
             prodList.add(item);
         }
-        System.out.println(prodList);
         return ResponseEntity.ok(prodList);
     }
 
