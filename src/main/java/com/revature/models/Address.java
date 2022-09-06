@@ -1,91 +1,50 @@
 package com.revature.models;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="addresses")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-=======
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
 @Entity
 @Table(name = "addresses")
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "address_id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressId")
 public class Address {
-
     @Id
-<<<<<<< HEAD
-    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int address_id;
-=======
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int addressId;
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
+    @Column(name = "address_id", nullable = false)
+    private Integer addressId;
 
-    @Column
+    @Column(name = "street")
     private String street;
 
-    @Column
+    @Column(name = "city")
     private String city;
 
-    @Column
-<<<<<<< HEAD
-    private String country;
-
-    @Column
-    private String zip_code;
-
-//    Many-to-One relationship
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user_id;
-=======
+    @Column(name = "state")
     private String state;
 
-    @Column
+    @Column(name = "country")
     private String country;
 
-    @Column
+    @Column(name = "zip_code")
     private String zipCode;
 
-    // Many-To-One Relationship
+    // Many-To-One Relationships
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    @JsonBackReference
-    private User userId;
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
 
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
+
+
 }
