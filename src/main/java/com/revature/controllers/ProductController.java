@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import com.revature.annotations.Authorized;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
@@ -45,34 +44,6 @@ public class ProductController {
         return ResponseEntity.ok(productService.save(product));
     }
 
-<<<<<<< HEAD
-//    @Authorized
-//    @PatchMapping
-//    public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) {
-//    	List<Product> productList = new ArrayList<Product>();
-//
-//    	for (int i = 0; i < metadata.size(); i++) {
-//    		Optional<Product> optional = productService.findById(metadata.get(i).getId());
-//
-//    		if(!optional.isPresent()) {
-//    			return ResponseEntity.notFound().build();
-//    		}
-//
-//    		Product product = optional.get();
-//
-//    		if(product.getQuantity() - metadata.get(i).getQuantity() < 0) {
-//    			return ResponseEntity.badRequest().build();
-//    		}
-//
-//    		product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
-//    		productList.add(product);
-//    	}
-//
-//        productService.saveAll(productList, metadata);
-//
-//        return ResponseEntity.ok(productList);
-//    }
-=======
     // @Authorized
     @PatchMapping
     public ResponseEntity<List<Product>> purchase(@RequestBody List<ProductInfo> metadata) {
@@ -99,7 +70,6 @@ public class ProductController {
 
         return ResponseEntity.ok(productList);
     }
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
 
     // @Authorized
     @DeleteMapping("/{id}")
