@@ -1,34 +1,40 @@
 package com.revature.models;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 @Data
-@Entity
-@Table(name = "products")
+@Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class OrderQuantityKey implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int prodId;
-    private int prodQuantity;
-    private double prodPrice;
-    private String prodDesc;
-    private String prodImage;
-    private String prodName;
+    @Column(name = "tran_id")
+    private int transactionId;
 
-    @OneToMany(mappedBy = "productId")
-    private List<OrderQuantityBought> quantityBoughts;
+    @Column(name = "product_id")
+    private int productId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        OrderQuantityKey that = (OrderQuantityKey) o;
+        return transactionId == that.transactionId && productId == that.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId, productId);
+    }
+
 }
