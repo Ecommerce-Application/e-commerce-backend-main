@@ -4,83 +4,72 @@ import com.revature.dtos.LoginRequest;
 import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import com.revature.services.UserService;
+import com.revature.util.JwtTokenManager;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true",
+        allowedHeaders = "*")
 public class AuthController {
 
-    private final AuthService authService;
+    private UserService userService;
+    private JwtTokenManager tokenManager;
+    private ModelMapper modelMapper = new ModelMapper();
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    @Autowired
+    public AuthController(UserService userService, JwtTokenManager tokenManager) {
+        this.userService = userService;
+        this.tokenManager = tokenManager;
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<User> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-//        Optional<User> optional = authService.findByCredentials(loginRequest.getEmail(), loginRequest.getPassword());
-//
-//        if(!optional.isPresent()) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//
-//        session.setAttribute("user", optional.get());
-//
-//        return ResponseEntity.ok(optional.get());
-//    }
-//
-//    @PostMapping("/logout")
-//    public ResponseEntity<Void> logout(HttpSession session) {
-//        session.removeAttribute("user");
-//
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@Valid @RequestBody LoginRequest loginDTO, HttpServletResponse response) {
+        User user = modelMapper.map(loginDTO, User.class);
+        User existingUser = userService.findByCredentials(user.getUserEmail(), user.getUserPassword());
 
-<<<<<<< HEAD
-//    @PostMapping("/register")
-//    public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) {
-//        User created = new User(0,
-//                registerRequest.getEmail(),
-//                registerRequest.getPassword(),
-//                registerRequest.getFirstName(),
-//                registerRequest.getLastName());
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
-//    }
-=======
-        if (!optional.isPresent()) {
-            return ResponseEntity.badRequest().build();
+        if (existingUser != null) {
+            String newToken = tokenManager.issueToken(existingUser);
+            User updatedToken = userService.addToken(existingUser.getUserEmail(), existingUser.getUserId(), newToken);
+            if (updatedToken != null) {
+                response.addHeader("rolodex-token", newToken);
+                response.addHeader("Access-Control-Expose-Header", "rolodex-token");
+                return ResponseEntity.status(HttpStatus.CREATED).body(existingUser);
+            } else {
+                response.addHeader("error-message", "Token was not saved in DB. Please try it again later.");
+                return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new User());
+            }
+        } else {
+            response.addHeader("error-message", "Provided credentials are incorrect.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new User());
         }
-
-        session.setAttribute("user", optional.get());
-
-        return ResponseEntity.ok(optional.get());
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpSession session) {
-        session.removeAttribute("user");
+    public ResponseEntity<User> logout(HttpServletRequest request, HttpServletResponse response) {
+        String userToken = request.getHeader("rolodex-token");
+        String userEmail = tokenManager.parseUserEmailFromToken(userToken);
+        int userId = tokenManager.parseUserIdFromToken(userToken);
 
-        return ResponseEntity.ok().build();
+        User existingUser = userService.removeToken(userEmail, userId);
+        if (existingUser != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new User());
+        } else {
+            response.addHeader("error-message", "Internal error. Please try it again later.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new User());
+        }
     }
 
-    // @PostMapping("/register")
-    // public ResponseEntity<User> register(@RequestBody RegisterRequest
-    // registerRequest) {
-    // User created = new User(0,
-    // registerRequest.getEmail(),
-    // registerRequest.getPassword(),
-    // registerRequest.getFirstName(),
-    // registerRequest.getLastName());
 
-    // return
-    // ResponseEntity.status(HttpStatus.CREATED).body(authService.register(created));
-    // }
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
 }
