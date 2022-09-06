@@ -1,8 +1,7 @@
 package com.revature.models;
 
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,82 +10,35 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="payments")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-=======
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
 @Entity
 @Table(name = "payments")
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "payment_id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "paymentId")
 public class Payment {
-
     @Id
-<<<<<<< HEAD
-    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int payment_id;
+    @Column(name = "payment_id", nullable = false)
+    private Integer paymentId;
 
-    @Column
-    private String cc_number;
-
-    @Column
-    private String exp_period;
-
-    @Column
-    private String zip_code;
-
-    @Column
-    private String svc_code;
-
-//    Many-to-One relationship
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user_id;
-=======
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int paymentId;
-
-    @Column
+    @Column(name = "cc_number")
     private String ccNumber;
 
-    @Column
+    @Column(name = "exp_period")
     private String expPeriod;
 
-    @Column
+    @Column(name = "zip_code")
     private String zipCode;
 
-    @Column
+    @Column(name = "svc_code")
     private String svcCode;
 
-    // Many-To-One Relationship
+    // Many-To-One Relationships
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    @JsonBackReference
-    private User userId;
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
 
->>>>>>> a4d472441f60ffe298410be441c00293285ad453
 }
