@@ -45,6 +45,7 @@ public class RegisterController {
             User updatedToken = userService.addToken(addedUser.getUserEmail(), addedUser.getUserId(), newToken);
 
             if (updatedToken != null) {
+                addedUser.setTokenId(newToken);
                 response.addHeader("rolodex-token", newToken);
                 response.addHeader("Access-Control-Expose-Header", "rolodex-token");
                 return ResponseEntity.status(HttpStatus.CREATED).body(addedUser);
