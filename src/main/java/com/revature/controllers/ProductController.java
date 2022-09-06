@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/prod")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" }, allowCredentials = "true")
+@RequestMapping("/prod")
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000", "http://localhost:5000"}, allowCredentials = "true")
 public class ProductController {
 
     private final ProductService prodService;
@@ -88,13 +88,13 @@ public class ProductController {
     // @Authorized
     @GetMapping("/search")
     public ResponseEntity<?> polyProductSearch(
-            @RequestParam(required = false, name = "tagQuery") final String tagQuery,
+            @RequestParam(required = false, name = "descQuery") final String descQuery,
             @RequestParam(required = false, name = "nameQuery") final String nameQuery,
             @RequestParam(required = false, name = "imageQuery") final String imageQuery,
-            @RequestParam(required = false, name = "priceQuery") final double priceQuery) {
+            @RequestParam(required = false, name = "priceQuery") final String priceQuery) {
 
-        if (tagQuery != null) {
-            Optional<List<Product>> taggedProducts = prodService.findByDescription(tagQuery);
+        if (descQuery != null) {
+            Optional<List<Product>> taggedProducts = prodService.findByDescription(descQuery);
             if (!taggedProducts.isPresent())
                 return ResponseEntity.notFound().build();
             return ResponseEntity.ok(taggedProducts.get());
@@ -111,9 +111,10 @@ public class ProductController {
                 return ResponseEntity.notFound().build();
             return ResponseEntity.ok(imagedProducts.get());
 
-        } else if (priceQuery != 0) {
+        } else if (priceQuery != null) {
             // todo validation check for priceQuery, what does the DTO actually trasmit
-            Optional<List<Product>> pricedProducts = prodService.findByPrice(priceQuery);
+            double locPriceQuery = Double.parseDouble(priceQuery);
+            Optional<List<Product>> pricedProducts = prodService.findByPrice(locPriceQuery);
             if (!pricedProducts.isPresent())
                 return ResponseEntity.notFound().build();
             return ResponseEntity.ok(pricedProducts.get());
