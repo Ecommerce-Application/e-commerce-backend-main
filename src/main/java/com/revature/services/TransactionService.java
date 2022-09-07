@@ -60,7 +60,7 @@ public class TransactionService {
             Product tempproduct=pr.getReferenceById(p.getProductId());
             OrderQuantityBought qty=new OrderQuantityBought();
             qty.setProductId(tempproduct);
-            qty.setTransactionId(tempTran);
+            qty.setTransactionId(TranReference);
             qty.setQuantity(p.getQty());
             OQBR.save(qty);
         }

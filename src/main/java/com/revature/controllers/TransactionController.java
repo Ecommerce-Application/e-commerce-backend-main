@@ -3,8 +3,9 @@ package com.revature.controllers;
 import com.revature.dtos.TransactionDto;
 import com.revature.models.Transaction;
 import com.revature.services.TransactionService;
+import com.revature.util.JwtTokenManager;
 import org.springframework.web.bind.annotation.*;
-import org.modelmapper.ModelMapper;
+
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,21 +17,26 @@ import java.util.Optional;
 public class TransactionController {
 
     private TransactionService ts;
+    JwtTokenManager tm;
 
 
-    public TransactionController(TransactionService ts) {
+
+    public TransactionController(TransactionService ts, JwtTokenManager tm) {
         this.ts = ts;
+        this.tm=tm;
     }
 
     @GetMapping("/{id}")
-    public Optional<List<Transaction>> findByUserId(@PathVariable("id") int id){
-
+    public Optional<List<Transaction>> findByUserId(@PathVariable("id") int id,
+                                                    @RequestHeader("rolodex-token") String token){
+        //int userId=tm.parseUserIdFromToken(token);
         return ts.findByUserId(id);
     }
 
 
     @PostMapping
-    public Transaction add(@Valid @RequestBody TransactionDto newTran){
+    public Transaction add(@Valid @RequestBody TransactionDto newTran,
+                           @RequestHeader("rolodex-token") String token){
 
         return ts.add(newTran);
 
