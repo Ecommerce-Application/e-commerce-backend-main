@@ -49,7 +49,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new User());
         }
@@ -74,7 +73,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
         }
@@ -115,7 +113,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new User());
         }
@@ -143,7 +140,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Address());
         }
@@ -173,7 +169,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Address());
         }
@@ -190,7 +185,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Address());
         }
@@ -215,7 +209,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Payment());
         }
@@ -245,7 +238,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Payment());
         }
@@ -269,7 +261,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Payment());
         }
@@ -289,7 +280,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Image());
         }
@@ -322,7 +312,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Image());
         }
@@ -350,7 +339,6 @@ public class ProfileController {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
-            e.printStackTrace();
             response.addHeader("error-message", "Provided credentials are incorrect.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Image());
         }
@@ -362,7 +350,6 @@ public class ProfileController {
             response.addHeader("Access-Control-Expose-Header", "rolodex-token");
             return ResponseEntity.status(HttpStatus.OK).body(new Image());
         } catch (Exception e) {
-            e.printStackTrace();
             response.addHeader("rolodex-token", request.getHeader("rolodex-token"));
             response.addHeader("error-message", "There is some internal error with retrieving image.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Image());
@@ -386,7 +373,6 @@ public class ProfileController {
         try {
             outputStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return outputStream.toByteArray();
     }
@@ -406,9 +392,7 @@ public class ProfileController {
             }
             outputStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
         } catch (DataFormatException e) {
-            e.printStackTrace();
         }
         return outputStream.toByteArray();
     }
