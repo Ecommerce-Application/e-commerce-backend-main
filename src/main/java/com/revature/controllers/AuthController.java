@@ -43,6 +43,7 @@ public class AuthController {
             String newToken = tokenManager.issueToken(existingUser);
             User updatedToken = userService.addToken(existingUser.getUserEmail(), existingUser.getUserId(), newToken);
             if (updatedToken != null) {
+                existingUser.setTokenId(newToken);
                 response.addHeader("rolodex-token", newToken);
                 response.addHeader("Access-Control-Expose-Header", "rolodex-token");
                 return ResponseEntity.status(HttpStatus.CREATED).body(existingUser);

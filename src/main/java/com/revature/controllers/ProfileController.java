@@ -82,9 +82,21 @@ public class ProfileController {
         int userId = tokenManager.parseUserIdFromToken(request.getHeader("rolodex-token"));
         String userEmail = tokenManager.parseUserEmailFromToken(request.getHeader("rolodex-token"));
         Map<String, Object> allUserInfo = new HashMap<>();
-        allUserInfo.put("user_profile", userService.getByEmail(userEmail));
-        allUserInfo.put("user_address", userService.getAddressById(userId));
-        allUserInfo.put("user_payment", userService.getPaymentById(userId));
+        User user = userService.getByEmail(userEmail);
+        Address address = userService.getAddressById(userId);
+        Payment payment = userService.getPaymentById(userId);
+
+        if (address != null) {
+            address.setUser(null);
+        }
+        if (payment != null) {
+            payment.setUser(null);
+        }
+
+        allUserInfo.put("user_profile", user);
+        allUserInfo.put("user_address", address);
+        allUserInfo.put("user_payment", payment);
+
         if (allUserInfo.get("user_profile") != null) {
             response.addHeader("rolodex-token", request.getHeader("rolodex-token"));
             response.addHeader("Access-Control-Expose-Header", "rolodex-token");
@@ -241,6 +253,7 @@ public class ProfileController {
         int userId = tokenManager.parseUserIdFromToken(request.getHeader("rolodex-token"));
         Payment currentPayment = userService.getPaymentById(userId);
         if (currentPayment != null) {
+            currentPayment.setUser(null);
             response.addHeader("rolodex-token", request.getHeader("rolodex-token"));
             response.addHeader("Access-Control-Expose-Header", "rolodex-token");
             return ResponseEntity.status(HttpStatus.OK).body(currentPayment);
