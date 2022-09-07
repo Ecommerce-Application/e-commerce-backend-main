@@ -1,16 +1,14 @@
 package com.revature.models;
 
-<<<<<<< HEAD
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
 
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Data
 @Entity
@@ -19,47 +17,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderQuantityBought {
 
-=======
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-public class OrderQuantityBought {
->>>>>>> c4351952ca92066fdf6b8436ecb0f7a07e59985b
+    @JsonIgnore
     @EmbeddedId
-    OrderQuantityKey id;
+    OrderQuantityKey id =new OrderQuantityKey();
 
-    @ManyToOne
-<<<<<<< HEAD
+    @JsonIgnore
+    @ManyToOne( cascade = CascadeType.ALL, targetEntity = Transaction.class)
     @MapsId("transactionId")
     @JoinColumn(name = "transaction_id")
     private Transaction transactionId;
 
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.ALL, optional = false, targetEntity = Product.class)
     @MapsId("productId")
     @JoinColumn(name = "product_id")
     private Product productId;
 
     private int quantity;
 
-=======
-    @MapsId("orderId")
-    @JoinColumn(name="order_id")
-    private Transaction order_id;
-
-    @ManyToOne
-    @MapsId("productId")
-    @JoinColumn(name="Product_id")
-    private Product product_id;
-
-    private int quantity;
 
 
 
 
->>>>>>> c4351952ca92066fdf6b8436ecb0f7a07e59985b
+
+
+
 }

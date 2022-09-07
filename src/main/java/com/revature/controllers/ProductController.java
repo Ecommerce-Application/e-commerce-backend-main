@@ -59,11 +59,11 @@ public class ProductController {
 
             Product product = optional.get();
 
-            if (product.getProdQuantity() - metadata.get(i).getQuantity() < 0) {
+            if (product.getQuantity() - metadata.get(i).getQuantity() < 0) {
                 return ResponseEntity.badRequest().build();
             }
 
-            product.setProdQuantity(product.getProdQuantity() - metadata.get(i).getQuantity());
+            product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
             productList.add(product);
         }
 
