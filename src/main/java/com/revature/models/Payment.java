@@ -1,51 +1,44 @@
 package com.revature.models;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import javax.persistence.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "payments")
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "payment_id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "paymentId")
 public class Payment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int paymentId;
+    @Column(name = "payment_id", nullable = false)
+    private Integer paymentId;
 
-    @Column
+    @Column(name = "cc_number")
     private String ccNumber;
 
-    @Column
+    @Column(name = "exp_period")
     private String expPeriod;
 
-    @Column
+    @Column(name = "zip_code")
     private String zipCode;
 
-    @Column
+    @Column(name = "svc_code")
     private String svcCode;
 
-    // Many-To-One Relationship
+    // Many-To-One Relationships
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    @JsonBackReference
-    private User userId;
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
 
 }
