@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import com.revature.annotations.Authorized;
 import com.revature.dtos.ProductInfo;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
@@ -59,11 +58,11 @@ public class ProductController {
 
             Product product = optional.get();
 
-            if (product.getQuantity() - metadata.get(i).getQuantity() < 0) {
+            if (product.getProdQuantity() - metadata.get(i).getQuantity() < 0) {
                 return ResponseEntity.badRequest().build();
             }
 
-            product.setQuantity(product.getQuantity() - metadata.get(i).getQuantity());
+            product.setProdQuantity(product.getProdQuantity() - metadata.get(i).getQuantity());
             productList.add(product);
         }
 

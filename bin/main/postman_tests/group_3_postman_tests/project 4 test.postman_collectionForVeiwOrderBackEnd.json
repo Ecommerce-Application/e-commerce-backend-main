@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "6ee81bf5-4cd2-4ff1-a601-13a2bed39e45",
+		"name": "project 4 test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23000910"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/order Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"total\": 18.89,\r\n    \"datePlaced\":25898685,\r\n    \"orderQuantityBoughts\":[\r\n        {\r\n            \"productId\":1,\r\n            \"qty\":3\r\n        },\r\n        {\r\n             \"productId\":2,\r\n             \"qty\":4\r\n\r\n        }\r\n\r\n       ]\r\n\r\n   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/order/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

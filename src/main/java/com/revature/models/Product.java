@@ -6,11 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.util.List;
 
 import javax.persistence.*;
-
 
 @Data
 @Entity
@@ -21,15 +19,13 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int prodId;
+    private int prodQuantity;
+    private double prodPrice;
+    private String prodDesc;
+    private String prodImage;
+    private String prodName;
 
-    private int id;
-    private int quantity;
-    private double price;
-    private String description;
-    private String image;
-    private String name;
-
-    @OneToMany(mappedBy = "productId", fetch = FetchType.EAGER)
-    @JsonIgnore
+    @OneToMany(mappedBy = "productId")
     private List<OrderQuantityBought> quantityBoughts;
 }

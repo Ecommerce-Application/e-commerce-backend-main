@@ -1,6 +1,5 @@
 package com.revature.models;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,18 +25,14 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int transactionId;
-
-
     private int userId;
     private double total;
     private long datePlaced;
 
-
     @OneToMany(mappedBy = "transactionId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderQuantityBought> orderQuantityBoughts=new ArrayList<OrderQuantityBought>()
+    private List<OrderQuantityBought> orderQuantityBoughts = new ArrayList<OrderQuantityBought>()
 
     {
     };
-
 
 }
