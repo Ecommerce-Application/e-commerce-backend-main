@@ -11,13 +11,15 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query("FROM Product WHERE prodDesc LIKE %:prodDesc")
+    @Query("FROM Product WHERE prodDesc LIKE %:prodDesc%")
     Optional<List<Product>> findByprodDesc(String prodDesc);
-    @Query("FROM Product WHERE prodName LIKE %:prodName")
-    Optional<List<Product>> findByProdName(String prodName);
-    @Query("FROM Product WHERE prodImage LIKE %:prodImage")
+    @Query("FROM Product WHERE prodName LIKE %:prodName%")
+    Optional<List<Product>> findByprodName(String prodName);
+    @Query("FROM Product WHERE prodImage LIKE %:prodImage%")
     Optional<List<Product>> findByprodImage(String prodImage);
-    @Query("FROM Product Where prodPrice LIKE %:prodPrice")
-    Optional<List<Product>> findByprodPrice(double prodPrice);
+    Optional<List<Product>> findByprodPrice(Double prodPrice);
+
+//    @Query("FROM Product WHERE prodPrice BETWEEN :priceQueryMin, :priceQueryMax")
+//    Optional<List<Product>> findByprodPriceRange(Double priceQueryMin, Double priceQueryMax);
 
 }
