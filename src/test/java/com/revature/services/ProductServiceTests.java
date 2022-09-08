@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-class ProductServiceTest {
+class ProductServiceTests {
 
     @Mock
     ProductRepository mockProdRepo;
