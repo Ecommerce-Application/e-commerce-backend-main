@@ -29,6 +29,7 @@ public class OrderQuantityBought {
     @ManyToOne(cascade = CascadeType.ALL, optional = false, targetEntity = Product.class)
     @MapsId("productId")
     @JoinColumn(name = "product_id")
+
     private Product productId;
 
     private int quantity;

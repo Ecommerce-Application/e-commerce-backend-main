@@ -37,6 +37,8 @@ public class TransactionController {
     @PostMapping
     public Transaction add(@Valid @RequestBody TransactionDto newTran,
                            @RequestHeader("rolodex-token") String token){
+//        int userId=tm.parseUserIdFromToken(token);
+//        newTran.setUserId(userId);
 
         return ts.add(newTran);
 

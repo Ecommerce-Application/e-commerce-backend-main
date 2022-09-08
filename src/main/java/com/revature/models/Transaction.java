@@ -30,6 +30,8 @@ public class Transaction {
     private long datePlaced;
 
     @OneToMany(mappedBy = "transactionId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
+    @JsonManagedReference
     private List<OrderQuantityBought> orderQuantityBoughts = new ArrayList<OrderQuantityBought>()
 
     {

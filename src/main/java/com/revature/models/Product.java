@@ -27,5 +27,6 @@ public class Product {
     private String prodName;
 
     @OneToMany(mappedBy = "productId")
+    @JsonIgnore
     private List<OrderQuantityBought> quantityBoughts;
 }
