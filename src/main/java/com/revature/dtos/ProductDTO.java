@@ -13,9 +13,6 @@ import javax.persistence.Id;
 //@AllArgsConstructor
 public class ProductDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int DtoId;
     private int prodIdDto;
     private int prodDtoQuantity;
 
@@ -28,10 +25,6 @@ public class ProductDTO {
 
 
     //getters/setters
-    public int getProdDtoId() {return DtoId;}
-
-    public void setProdDtoId(int DtoId) {this.DtoId = DtoId;}
-
     public int getProdId() {return prodIdDto;}
 
     public void setProdId(int prodIdDto) {this.prodIdDto = prodIdDto;}
