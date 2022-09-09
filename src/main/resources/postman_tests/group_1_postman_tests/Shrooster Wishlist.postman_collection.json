@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6e98388d-71ac-450d-a2b0-98b587a233ee",
+		"_postman_id": "cc47da5d-4337-4116-93e9-38b908424128",
 		"name": "Shrooster Wishlist",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "22240519"
+		"_exporter_id": "22269619"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/wish/post/2/1",
+					"raw": "http://localhost:5000/api/wish/post/1/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -22,8 +22,8 @@
 						"api",
 						"wish",
 						"post",
-						"2",
-						"1"
+						"1",
+						"3"
 					]
 				}
 			},
@@ -35,7 +35,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/wish/delete/2/1",
+					"raw": "http://localhost:5000/api/wish/delete/1/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,8 +45,8 @@
 						"api",
 						"wish",
 						"delete",
-						"2",
-						"1"
+						"1",
+						"2"
 					]
 				}
 			},
@@ -80,7 +80,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/api/product/1",
+					"raw": "http://localhost:5000/api/prod/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -88,7 +88,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"product",
+						"prod",
 						"1"
 					]
 				}
