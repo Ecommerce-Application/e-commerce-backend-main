@@ -1,8 +1,10 @@
 package com.revature.controllers;
 
+import com.revature.dtos.ProductCreateDTO;
 import com.revature.dtos.ProductDTO;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService prodService;
+    private final ModelMapper modMap = new ModelMapper();
 
     public ProductController(ProductService prodService) {
         this.prodService = prodService;
@@ -39,14 +42,15 @@ public class ProductController {
 
     // @Authorized
     @PutMapping
-    public ResponseEntity<Product> upsertProduct(@RequestBody Product prod) {
+    public ResponseEntity<Product> upsertProduct(@RequestBody ProductCreateDTO newProd) {
+        Product prod = modMap.map(newProd, Product.class);
         return ResponseEntity.ok(prodService.save(prod));
     }
 
     // @Authorized
     @PatchMapping
     public ResponseEntity<List<Product>> purchaseProduct(@RequestBody List<ProductDTO> prodDTO) {
-        List<Product> prodList = new ArrayList<Product>();
+        List<Product> prodList = new ArrayList<>();
 
         for (int i = 0; i < prodDTO.size(); i++) {
             Optional<Product> optional = prodService.findById(prodDTO.get(i).getProdId());
@@ -111,8 +115,6 @@ public class ProductController {
             return ResponseEntity.ok(imagedProducts.get());
 
         } else if (priceQuery != null) {
-            // todo validation check for priceQuery, what does the DTO actually trasmit
-            // System.out.println("Price Query: " + priceQuery); //debug statement
             Optional<List<Product>> pricedProducts = prodService.findByPrice(priceQuery);
             if (!pricedProducts.isPresent())
                 return ResponseEntity.notFound().build();

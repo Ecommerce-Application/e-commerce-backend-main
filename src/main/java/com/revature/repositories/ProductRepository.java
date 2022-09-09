@@ -19,7 +19,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     Optional<List<Product>> findByprodImage(String prodImage);
     Optional<List<Product>> findByprodPrice(Double prodPrice);
 
-//    @Query("FROM Product WHERE prodPrice BETWEEN :priceQueryMin, :priceQueryMax")
-//    Optional<List<Product>> findByprodPriceRange(Double priceQueryMin, Double priceQueryMax);
-
 }
