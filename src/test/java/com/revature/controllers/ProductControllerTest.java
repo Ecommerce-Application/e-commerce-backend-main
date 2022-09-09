@@ -119,7 +119,7 @@ class ProductControllerTest {
     @Test
     void purchaseProduct_SUCCESS() {
         //PATCH map
-        given(this.testProdSer.findById(this.testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
+        //given(this.testProdSer.findById(this.testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
 
         //this.testProdCon.purchaseProduct(this.testProdTO);
 
