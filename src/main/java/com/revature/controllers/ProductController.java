@@ -49,11 +49,11 @@ public class ProductController {
 
     // @Authorized
     @PatchMapping
-    public ResponseEntity<List<Product>> purchaseProduct(@RequestBody List<ProductDTO> prodDTO) {
+    public ResponseEntity<List<Product>> purchaseProduct(@RequestBody ProductDTO[] prodDTO) {
         List<Product> prodList = new ArrayList<>();
 
-        for (int i = 0; i < prodDTO.size(); i++) {
-            Optional<Product> optional = prodService.findById(prodDTO.get(i).getProdId());
+        for (ProductDTO i : prodDTO) {
+            Optional<Product> optional = prodService.findById(i.getProdIdDto());
 
             if (!optional.isPresent()) {
                 return ResponseEntity.notFound().build();
@@ -61,15 +61,15 @@ public class ProductController {
 
             Product prod = optional.get();
 
-            if (prod.getProdQuantity() - prodDTO.get(i).getProdDtoQuantity() < 0) {
+            if (prod.getProdQuantity() - i.getProdDtoQuantity() < 0) {
                 return ResponseEntity.badRequest().build();
             }
 
-            prod.setProdQuantity(prod.getProdQuantity() - prodDTO.get(i).getProdDtoQuantity());
+            prod.setProdQuantity(prod.getProdQuantity() - i.getProdDtoQuantity());
             prodList.add(prod);
         }
 
-        prodService.saveAll(prodList, prodDTO);
+        prodService.saveAll(prodList);
 
         return ResponseEntity.ok(prodList);
     }

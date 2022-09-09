@@ -29,7 +29,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public List<Product> saveAll(List<Product> productList, List<ProductDTO> metadata) {
+    public List<Product> saveAll(List<Product> productList) {
         return productRepository.saveAll(productList);
     }
 

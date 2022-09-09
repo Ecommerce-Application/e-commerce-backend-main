@@ -13,6 +13,8 @@ public class ProductCreateDTO {
 
     //Constructor, Getters and Setters
 
+    public ProductCreateDTO() {}
+
     public ProductCreateDTO(int prodQuantity, double prodPrice, String prodDesc, String prodImage, String prodName) {
         this.prodQuantity = prodQuantity;
         this.prodPrice = prodPrice;
