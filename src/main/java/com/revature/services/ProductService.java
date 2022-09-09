@@ -5,7 +5,9 @@ import com.revature.models.Product;
 import com.revature.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -37,12 +39,13 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // Special requests, new stuff
 
+    // Special requests, new stuff
     // For loose-matched search function
 
-    public Optional<List<Product>> findByName(String name) {
-        return productRepository.findByprodName(name);
+    public Optional<List<Product>> findByName(String prodName) {
+        prodName = prodName.substring(0,1).toUpperCase() + prodName.substring(1).toLowerCase();
+        return productRepository.findByprodName(prodName);
     }
 
     public Optional<List<Product>> findByDescription(String descQuery) {
