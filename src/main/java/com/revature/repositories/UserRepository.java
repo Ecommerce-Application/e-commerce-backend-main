@@ -53,8 +53,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "update users set user_password = :new_password where (user_id = :user_id) and (user_email like :user_email) returning *",
             nativeQuery = true)
     Optional<User> setNewPassword(@Param(value = "user_email") String userEmail,
-                                @Param(value = "user_id") int userId,
-                                @Param(value = "new_password") String newPassword);
+                                  @Param(value = "user_id") int userId,
+                                  @Param(value = "new_password") String newPassword);
 
     @Query(value = "select * from users where (user_email like :user_email) and (user_id = :user_id) and (token_id like :current_token)",
             nativeQuery = true)

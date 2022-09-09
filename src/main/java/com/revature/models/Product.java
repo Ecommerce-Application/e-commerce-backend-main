@@ -1,8 +1,11 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -10,15 +13,6 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int prodId;
-    private int prodQuantity;
-    private double prodPrice;
-    private String prodDesc;
-    private String prodImage;
-    private String prodName;
 
     // Explicit constructor
     public Product() { }
@@ -31,52 +25,16 @@ public class Product {
         this.prodName = prodName;
     }
 
-    // getters and setters
-    public int getProdId() {
-        return prodId;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int prodId;
+    private int prodQuantity;
+    private double prodPrice;
+    private String prodDesc;
+    private String prodImage;
+    private String prodName;
 
-    public void setProdId(int prodId) {
-        this.prodId = prodId;
-    }
-
-    public int getProdQuantity() {
-        return prodQuantity;
-    }
-
-    public void setProdQuantity(int prodQuantity) {
-        this.prodQuantity = prodQuantity;
-    }
-
-    public double getProdPrice() {
-        return prodPrice;
-    }
-
-    public void setProdPrice(double prodPrice) {
-        this.prodPrice = prodPrice;
-    }
-
-    public String getProdDesc() {
-        return prodDesc;
-    }
-
-    public void setProdDesc(String prodDesc) {
-        this.prodDesc = prodDesc;
-    }
-
-    public String getProdImage() {
-        return prodImage;
-    }
-
-    public void setProdImage(String prodImage) {
-        this.prodImage = prodImage;
-    }
-
-    public String getProdName() {
-        return prodName;
-    }
-
-    public void setProdName(String prodName) {
-        this.prodName = prodName;
-    }
+    @OneToMany(mappedBy = "productId")
+    @JsonIgnore
+    private List<OrderQuantityBought> quantityBoughts;
 }

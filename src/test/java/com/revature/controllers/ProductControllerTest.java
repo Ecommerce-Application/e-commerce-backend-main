@@ -42,17 +42,14 @@ class ProductControllerTest {
     List<Product> testProdList;
     List<ProductDTO> testTOList;
 
-
-
-
-    //Test Setup
+    // Test Setup
     @BeforeEach
     void setUp() {
         this.testProdSer = new ProductService(testProdRep);
         this.testProdCon = new ProductController(testProdSer);
 
-        this.testProduct1 = new Product(1, 10, 20.5, "someDesc", "someImage", "someName");
-        this.testProduct2 = new Product(2, 10, 20.5, "prod2Desc", "prod2Image", "prod2Name");
+        this.testProduct1 = new Product(10, 20.5, "someDesc", "someImage", "someName");
+        this.testProduct2 = new Product(10, 20.5, "someDesc", "someImage", "someName");
 
         this.testProdList = new ArrayList<>();
         this.testProdList.add(testProduct1);
@@ -72,7 +69,7 @@ class ProductControllerTest {
         this.testProdSer = null;
     }
 
-    //Test Collection
+    // Test Collection
     @Test
     void getInventory() {
     }
@@ -83,13 +80,13 @@ class ProductControllerTest {
         given(this.testProdRep.findById(testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
         given(this.testProdSer.findById(testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
 
-
         Product expected = this.testProduct1;
         Product actual = (this.testProdCon.getProductById(testProduct1.getProdId())).getBody();
 
         assertEquals(expected, actual);
-        //verify(this.testProdCon, times(1)).getProductById(1);
+        // verify(this.testProdCon, times(1)).getProductById(1);
     }
+
     @Test
     void getProdById_FAILURE_ThrowsException() {
 
@@ -103,30 +100,31 @@ class ProductControllerTest {
             // prove that the Exception thrown was indeed a ProductNotFoundException
             assertEquals(ProductNotFoundException.class, e.getClass());
         }
-        //verify(this.testProdSer, times(1)).findById(testProduct1.getProdId());
+        // verify(this.testProdSer, times(1)).findById(testProduct1.getProdId());
     }
 
     @Test
     void upsertProduct() {
-        //PUT map
-//        given(this.testProdSer.save(this.testProduct1)).willReturn((this.testProduct1));
-//        Product expected = this.testProduct1;
-//        Product actual = (this.testProdCon.upsertProduct(this.testProduct1)).getBody();
-//
-//        assertEquals(expected, actual);
+        // PUT map
+        given(this.testProdSer.save(this.testProduct1)).willReturn((this.testProduct1));
+        Product expected = this.testProduct1;
+        Product actual = (this.testProdCon.upsertProduct(this.testProduct1)).getBody();
+
+        assertEquals(expected, actual);
     }
 
     @Test
     void purchaseProduct_SUCCESS() {
-        //PATCH map
-        //given(this.testProdSer.findById(this.testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
+        // PATCH map
+        // given(this.testProdSer.findById(this.testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
 
-        //this.testProdCon.purchaseProduct(this.testProdTO);
+        // this.testProdCon.purchaseProduct(this.testProdTO);
 
     }
+
     @Test
     void purchaseProduct_FAILURE_InvException() {
-        //PATCH map
+        // PATCH map
 
     }
 
