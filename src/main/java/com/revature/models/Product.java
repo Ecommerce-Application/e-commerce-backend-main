@@ -1,6 +1,5 @@
 package com.revature.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +11,18 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "products")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
+
+    // Explicit constructor
+    public Product(int prodQuantity, double prodPrice, String prodDesc, String prodImage, String prodName) {
+        this.prodQuantity = prodQuantity;
+        this.prodPrice = prodPrice;
+        this.prodDesc = prodDesc;
+        this.prodImage = prodImage;
+        this.prodName = prodName;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

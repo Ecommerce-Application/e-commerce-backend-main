@@ -1,16 +1,22 @@
 {
 	"info": {
-		"_postman_id": "6ee81bf5-4cd2-4ff1-a601-13a2bed39e45",
+		"_postman_id": "15de6c9c-11e9-4f33-bd7d-b075c17d7239",
 		"name": "project 4 test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23000910"
+		"_exporter_id": "22269619"
 	},
 	"item": [
 		{
 			"name": "http://localhost:5000/api/order Copy",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "rolodex-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2Mjc0NzIxMH0.qA3kEBBjKyGFaRcUzcyxtdlD2--v8eMbJvQBPf1FriU",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"userId\": 1,\r\n    \"total\": 18.89,\r\n    \"datePlaced\":25898685,\r\n    \"orderQuantityBoughts\":[\r\n        {\r\n            \"productId\":1,\r\n            \"qty\":3\r\n        },\r\n        {\r\n             \"productId\":2,\r\n             \"qty\":4\r\n\r\n        }\r\n\r\n       ]\r\n\r\n   \r\n}",
@@ -39,9 +45,15 @@
 			"name": "http://localhost:5000/api/order/1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "rolodex-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2Mjc0NzIxMH0.qA3kEBBjKyGFaRcUzcyxtdlD2--v8eMbJvQBPf1FriU",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:5000/api/order/1",
+					"raw": "http://localhost:5000/api/order",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -49,8 +61,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"order",
-						"1"
+						"order"
 					]
 				}
 			},
