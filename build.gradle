@@ -67,6 +67,11 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
 sonarqube {
   properties {
     property 'sonar.host.url', 'https://sonarcloud.io'

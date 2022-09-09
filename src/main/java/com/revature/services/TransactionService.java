@@ -41,6 +41,7 @@ public class TransactionService {
         List<TransactionQtyDTO> prodList=newTran.getOrderQuantityBoughts();
         newTran.setOrderQuantityBoughts(null);
         Transaction tempTran=maper.map(newTran,Transaction.class);
+
         tempTran.setTransactionId(0); //so the transaction create a new row and not update a row
         newTran.setOrderQuantityBoughts(null);
 
@@ -48,10 +49,6 @@ public class TransactionService {
         //saves cathces the new transaction id and get a reference for the product  list
 
         Transaction dataBaseTran=tr.save(tempTran);
-
-        System.out.println();
-        System.out.println(dataBaseTran);
-        System.out.println();
 
         Transaction TranReference= tr.getReferenceById(dataBaseTran.getTransactionId());
 
