@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import com.revature.dtos.ProductInfo;
+import com.revature.dtos.ProductDTO;
 import com.revature.models.Product;
 import com.revature.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -28,12 +28,32 @@ public class ProductService {
     public Product save(Product product) {
         return productRepository.save(product);
     }
-    
-    public List<Product> saveAll(List<Product> productList, List<ProductInfo> metadata) {
-    	return productRepository.saveAll(productList);
+
+    public List<Product> saveAll(List<Product> productList, List<ProductDTO> metadata) {
+        return productRepository.saveAll(productList);
     }
 
     public void delete(int id) {
         productRepository.deleteById(id);
+    }
+
+    // Special requests, new stuff
+
+    // For loose-matched search function
+
+    public Optional<List<Product>> findByName(String name) {
+        return productRepository.findByprodName(name);
+    }
+
+    public Optional<List<Product>> findByDescription(String descQuery) {
+        return productRepository.findByprodDesc(descQuery);
+    }
+
+    public Optional<List<Product>> findByImage(String imageQuery) {
+        return productRepository.findByprodImage(imageQuery);
+    }
+
+    public Optional<List<Product>> findByPrice(double priceQuery) {
+        return productRepository.findByprodPrice(priceQuery);
     }
 }
