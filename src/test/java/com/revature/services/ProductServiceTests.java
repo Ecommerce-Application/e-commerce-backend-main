@@ -30,14 +30,15 @@ class ProductServiceTests {
     List<Product> dummyList = new ArrayList<>();
 
     Product dummyProd;
-    //Product dummyProd2;
+    // Product dummyProd2;
 
     @BeforeEach
     void setUp() throws Exception {
-        this.dummyProd = new Product(1, 1, 1, "someDesc", "someImage", "someName");
-        //this.dummyProd2 = new Product(2, 1, 1, "someDesc2", "someImage2", "someName2");
+        this.dummyProd = new Product(1, 1, "someDesc", "someImage", "someName");
+        // this.dummyProd2 = new Product(2, 1, 1, "someDesc2", "someImage2",
+        // "someName2");
         this.dummyList.add(0, this.dummyProd);
-        //this.dummyList.add(1, this.dummyProd2);
+        // this.dummyList.add(1, this.dummyProd2);
     }
 
     @AfterEach
@@ -76,10 +77,9 @@ class ProductServiceTests {
 
     }
 
-
-//    @Test
-//    void findAll() {
-//    }
+    // @Test
+    // void findAll() {
+    // }
 
     @Test
     void findByName() {

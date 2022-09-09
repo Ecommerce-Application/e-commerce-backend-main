@@ -21,7 +21,7 @@ public class JwtTokenManager {
         this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
-//    Generate token
+    // Generate token
     public String issueToken(User user) {
         return Jwts.builder()
                 .setId(String.valueOf(user.getUserId()))
@@ -31,14 +31,13 @@ public class JwtTokenManager {
                 .signWith(key).compact();
     }
 
-//    Parse token
+    // Parse token
     public int parseUserIdFromToken(String token) {
         try {
             return Integer.parseInt(Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
-                    .parseClaimsJws(token).getBody().getId()
-            );
+                    .parseClaimsJws(token).getBody().getId());
         } catch (Exception e) {
             logger.warn("JWT error parsing user id from token");
             throw new AuthenticationException("Your session is expired. Please sign in again.");
