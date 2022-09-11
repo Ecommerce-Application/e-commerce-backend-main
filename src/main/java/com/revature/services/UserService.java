@@ -28,9 +28,7 @@ public class UserService {
 
     //    Constructors
     @Autowired
-    public UserService(UserRepository userRepository, AddressRepository addressRepository,
-                       PaymentRepository paymentRepository, ImageRepository imageRepository,
-                       JwtTokenManager tokenManager) {
+    public UserService(UserRepository userRepository, AddressRepository addressRepository, PaymentRepository paymentRepository, ImageRepository imageRepository, JwtTokenManager tokenManager) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.paymentRepository = paymentRepository;

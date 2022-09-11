@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "2c2dabfd-e1a5-4e1f-baf8-dca4514ef430",
-		"name": "Revature_Project3",
+		"name": "Revature_Project3-User_Profile_Back_End-Ruslan",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10570928"
 	},
@@ -19,7 +19,7 @@
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc4OH0.NwKzm3ZKgjgLbR0aKSuQ_VlA9wanMVkLjc9XoCTOZ8o",
 										"type": "text"
 									}
 								],
@@ -45,7 +45,7 @@
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc4OH0.NwKzm3ZKgjgLbR0aKSuQ_VlA9wanMVkLjc9XoCTOZ8o",
 										"type": "text"
 									}
 								],
@@ -73,13 +73,47 @@
 							"response": []
 						},
 						{
+							"name": "Get profile image",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rolodex-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2Mjc5MTUzNX0.QIYg5GgPxymHn1O5JGq-1VKBf3FeNsn4M_oysh7pChg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/profile/image",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"profile",
+										"image"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get information about address",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc4OH0.NwKzm3ZKgjgLbR0aKSuQ_VlA9wanMVkLjc9XoCTOZ8o",
 										"type": "text"
 									}
 								],
@@ -106,7 +140,7 @@
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc4OH0.NwKzm3ZKgjgLbR0aKSuQ_VlA9wanMVkLjc9XoCTOZ8o",
 										"type": "text"
 									}
 								],
@@ -125,70 +159,6 @@
 								}
 							},
 							"response": []
-						}
-					]
-				},
-				{
-					"name": "DELETE",
-					"item": [
-						{
-							"name": "Profile",
-							"item": [
-								{
-									"name": "Delete address information",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "rolodex-token",
-												"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjgzOH0.UQZgGicuuyrc2ft9Mc1W2ymhCaQ1yTS0RbZDYSNhZGM",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "http://localhost:5000/api/profile/uaddress",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "5000",
-											"path": [
-												"api",
-												"profile",
-												"uaddress"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete payment information",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "rolodex-token",
-												"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjgzOH0.UQZgGicuuyrc2ft9Mc1W2ymhCaQ1yTS0RbZDYSNhZGM",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "http://localhost:5000/api/profile/upayment",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "5000",
-											"path": [
-												"api",
-												"profile",
-												"upayment"
-											]
-										}
-									},
-									"response": []
-								}
-							]
 						}
 					]
 				}
@@ -387,7 +357,7 @@
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc2NH0.2TrJngqtcUab18Y2hD3huKKxwoOAVsI-XGXsOwFLEGg",
 										"type": "text"
 									}
 								],
@@ -419,7 +389,7 @@
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc4OH0.NwKzm3ZKgjgLbR0aKSuQ_VlA9wanMVkLjc9XoCTOZ8o",
 										"type": "text"
 									}
 								],
@@ -449,13 +419,56 @@
 							"response": []
 						},
 						{
+							"name": "Add/update profile image",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rolodex-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2Mjc5MTMwMX0.X6NuEmzj2_L8b0DjDembeCERJ2dqVVguyw_hg4SAY6U",
+										"type": "text"
+									},
+									{
+										"key": "imageFile",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imageFile",
+											"type": "file",
+											"src": "/C:/Users/rshul/Pictures/picts/osman-rana-dI9KhXi0ooE-unsplash.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/profile/image",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"profile",
+										"image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Add/update payment",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "rolodex-token",
-										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjc2MX0.sO4RLePh0booPbewRnPheRCkTpwDmRrJ40AyhF_DylI",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjU2MTc4OH0.NwKzm3ZKgjgLbR0aKSuQ_VlA9wanMVkLjc9XoCTOZ8o",
 										"type": "text"
 									}
 								],
@@ -524,6 +537,97 @@
 									"path": [
 										"api",
 										"profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Delete address information",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "rolodex-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjgzOH0.UQZgGicuuyrc2ft9Mc1W2ymhCaQ1yTS0RbZDYSNhZGM",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/profile/uaddress",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"profile",
+										"uaddress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete image by id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "rolodex-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjgyOTc5NX0.f_p143DWQfoeKV8u_RuBgFwO29DUJ7BELf6n6vpxiZo",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/profile/image",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"profile",
+										"image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete payment information",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "rolodex-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoidGVzdEBnbWFpbC5jb20iLCJpc3MiOiJSb2xvZGV4IEFQSSIsImlhdCI6MTY2MjQzMjgzOH0.UQZgGicuuyrc2ft9Mc1W2ymhCaQ1yTS0RbZDYSNhZGM",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/profile/upayment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"profile",
+										"upayment"
 									]
 								}
 							},
