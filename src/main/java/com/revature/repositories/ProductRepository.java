@@ -12,7 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    //Uses pattern matching to find products based on keywords in the description field
+    // Uses pattern matching to find products based on keywords in the description
+    // field
     @Query("FROM Product WHERE prodDesc LIKE %:prodDesc%")
 //<<<<<<< Updated upstream
     Optional<List<Product>> findByprodDesc(@Param(value = "prodDesc") String prodDesc);

@@ -9,11 +9,10 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "products")
+@NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-
-    // Explicit constructor
-    public Product() { }
 
     public Product(int prodQuantity, double prodPrice, String prodDesc, String prodImage, String prodName) {
         this.prodQuantity = prodQuantity;
