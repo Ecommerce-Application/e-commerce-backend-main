@@ -1,8 +1,10 @@
 package com.revature.controllers;
 
+import com.revature.dtos.ProductCreateDTO;
 import com.revature.dtos.ProductDTO;
 import com.revature.models.Product;
 import com.revature.services.ProductService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -11,10 +13,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/prod")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000", "http://localhost:5000" }, allowCredentials = "true")
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000",
+        "http://localhost:5000" }, allowCredentials = "true")
 public class ProductController {
 
     private final ProductService prodService;
+    private final ModelMapper modMap = new ModelMapper();
 
     public ProductController(ProductService prodService) {
         this.prodService = prodService;
@@ -39,17 +43,18 @@ public class ProductController {
 
     // @Authorized
     @PutMapping
-    public ResponseEntity<Product> upsertProduct(@RequestBody Product prod) {
+    public ResponseEntity<Product> upsertProduct(@RequestBody ProductCreateDTO newProd) {
+        Product prod = modMap.map(newProd, Product.class);
         return ResponseEntity.ok(prodService.save(prod));
     }
 
     // @Authorized
     @PatchMapping
-    public ResponseEntity<List<Product>> purchaseProduct(@RequestBody List<ProductDTO> prodDTO) {
-        List<Product> prodList = new ArrayList<Product>();
+    public ResponseEntity<List<Product>> purchaseProduct(@RequestBody ProductDTO[] prodDTO) {
+        List<Product> prodList = new ArrayList<>();
 
-        for (int i = 0; i < prodDTO.size(); i++) {
-            Optional<Product> optional = prodService.findById(prodDTO.get(i).getProdId());
+        for (ProductDTO i : prodDTO) {
+            Optional<Product> optional = prodService.findById(i.getProdIdDto());
 
             if (!optional.isPresent()) {
                 return ResponseEntity.notFound().build();
@@ -57,15 +62,15 @@ public class ProductController {
 
             Product prod = optional.get();
 
-            if (prod.getProdQuantity() - prodDTO.get(i).getProdDtoQuantity() < 0) {
+            if (prod.getProdQuantity() - i.getProdDtoQuantity() < 0) {
                 return ResponseEntity.badRequest().build();
             }
 
-            prod.setProdQuantity(prod.getProdQuantity() - prodDTO.get(i).getProdDtoQuantity());
+            prod.setProdQuantity(prod.getProdQuantity() - i.getProdDtoQuantity());
             prodList.add(prod);
         }
 
-        prodService.saveAll(prodList, prodDTO);
+        prodService.saveAll(prodList);
 
         return ResponseEntity.ok(prodList);
     }
@@ -111,8 +116,6 @@ public class ProductController {
             return ResponseEntity.ok(imagedProducts.get());
 
         } else if (priceQuery != null) {
-            // todo validation check for priceQuery, what does the DTO actually trasmit
-            // System.out.println("Price Query: " + priceQuery); //debug statement
             Optional<List<Product>> pricedProducts = prodService.findByPrice(priceQuery);
             if (!pricedProducts.isPresent())
                 return ResponseEntity.notFound().build();
