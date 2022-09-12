@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.exceptions.UnauthorizedSessionException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Address;
 import com.revature.models.Image;
 import com.revature.models.Payment;
@@ -25,11 +26,9 @@ public class UserService {
     private final ImageRepository imageRepository;
     private JwtTokenManager tokenManager;
 
-//    Constructors
+    //    Constructors
     @Autowired
-    public UserService(UserRepository userRepository, AddressRepository addressRepository,
-                       PaymentRepository paymentRepository, ImageRepository imageRepository,
-                       JwtTokenManager tokenManager) {
+    public UserService(UserRepository userRepository, AddressRepository addressRepository, PaymentRepository paymentRepository, ImageRepository imageRepository, JwtTokenManager tokenManager) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.paymentRepository = paymentRepository;
@@ -37,7 +36,7 @@ public class UserService {
         this.tokenManager = tokenManager;
     }
 
-//    Methods
+    //    Methods
 //    USER
     @Transactional
     public User findByCredentials(String email, String password) {
@@ -82,7 +81,13 @@ public class UserService {
         return addedUser.orElse(null);
     }
 
-//    ADDRESS
+    @Transactional(readOnly = true)
+    public User findByUserId(int userId) {
+        Optional<User> user = userRepository.findById(userId);
+        return user.orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found."));
+    }
+
+    //    ADDRESS
     @Transactional
     public Address updateAddressById(Address address, int userId) {
         Optional<Address> updatedAddress = addressRepository.updateAddressById(address.getCity(), address.getCountry(),
@@ -110,7 +115,7 @@ public class UserService {
     }
 
 
-//    PAYMENT
+    //    PAYMENT
     @Transactional
     public Payment updatePaymentById(Payment address, int userId) {
         Optional<Payment> updatedPayment = paymentRepository.updatePaymentById(address.getCcNumber(),
@@ -137,7 +142,7 @@ public class UserService {
         return deletedPayment.orElse(null);
     }
 
-//    VALIDATION
+    //    VALIDATION
     @Transactional
     public User validateSession(String currentToken) {
         String userEmail = tokenManager.parseUserEmailFromToken(currentToken);
@@ -146,7 +151,7 @@ public class UserService {
         return existingSession.orElseThrow(() -> new UnauthorizedSessionException("Session is expired. Please sign-in first."));
     }
 
-//    IMAGE
+    //    IMAGE
     @Transactional
     public Image getImageById(int userId) {
         Optional<Image> image = imageRepository.getImageById(userId);
