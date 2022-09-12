@@ -274,7 +274,7 @@ public class ProfileController {
 
 //    IMAGE
     @PostMapping("/image")
-    public ResponseEntity<Image> addImage(MultipartFile file,
+    public ResponseEntity<Image> addImage(@RequestParam("imageFile") MultipartFile file,
                                           HttpServletResponse response,
                                           HttpServletRequest request) throws IOException {
         try {
@@ -298,6 +298,7 @@ public class ProfileController {
         }
 
         if (newImage != null) {
+            newImage.setUser(null);
             response.addHeader("rolodex-token", request.getHeader("rolodex-token"));
             response.addHeader("Access-Control-Expose-Header", "rolodex-token");
             return ResponseEntity.status(HttpStatus.OK).body(newImage);

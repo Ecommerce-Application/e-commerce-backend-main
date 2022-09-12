@@ -33,4 +33,12 @@ public class OrderQuantityBought {
 
     private int quantity;
 
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", quantity='" + getQuantity() + "'" +
+                "}";
+    }
+
 }
