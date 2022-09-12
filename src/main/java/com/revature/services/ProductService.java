@@ -36,7 +36,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-
     // Special requests, new stuff
     // For loose-matched search function
 
@@ -57,14 +56,20 @@ public class ProductService {
         return Optional.of(prodList);
     }
 
+    // Calls the user-defined findByprodDesc method defined in the product
+    // repository layer
     public Optional<List<Product>> findByDescription(String descQuery) {
         return productRepository.findByprodDesc(descQuery);
     }
 
+    // Calls the user-defined findByprodImage method defined in the product
+    // repository layer
     public Optional<List<Product>> findByImage(String imageQuery) {
         return productRepository.findByprodImage(imageQuery);
     }
 
+    // Calls the user-defined findByprodPrice method defined in the product
+    // repository layer
     public Optional<List<Product>> findByPrice(double priceQuery) {
         return productRepository.findByprodPrice(priceQuery);
     }
