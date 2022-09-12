@@ -1,9 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.dtos.LoginRequest;
-import com.revature.dtos.RegisterRequest;
 import com.revature.models.User;
-import com.revature.services.AuthService;
 import com.revature.services.UserService;
 import com.revature.util.JwtTokenManager;
 import org.modelmapper.ModelMapper;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
