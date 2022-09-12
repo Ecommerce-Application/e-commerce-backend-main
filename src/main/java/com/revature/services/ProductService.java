@@ -1,11 +1,10 @@
 package com.revature.services;
 
-import com.revature.dtos.ProductInfo;
+import com.revature.dtos.ProductDTO;
 import com.revature.models.Product;
 import com.revature.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public List<Product> saveAll(List<Product> productList, List<ProductInfo> metadata) {
+    public List<Product> saveAll(List<Product> productList, List<ProductDTO> metadata) {
         return productRepository.saveAll(productList);
     }
 
@@ -43,12 +42,11 @@ public class ProductService {
     // For loose-matched search function
 
     public Optional<List<Product>> findByName(String name) {
-
-        return productRepository.findByProdName(name);
+        return productRepository.findByprodName(name);
     }
 
-    public Optional<List<Product>> findByDescription(String tagQuery) {
-        return productRepository.findByprodDesc(tagQuery);
+    public Optional<List<Product>> findByDescription(String descQuery) {
+        return productRepository.findByprodDesc(descQuery);
     }
 
     public Optional<List<Product>> findByImage(String imageQuery) {
@@ -57,17 +55,5 @@ public class ProductService {
 
     public Optional<List<Product>> findByPrice(double priceQuery) {
         return productRepository.findByprodPrice(priceQuery);
-    }
-
-    public List<Product> searchByTag(String tagQuery) {
-        List<Product> taggedProducts = null;
-        List<Product> everything = productRepository.findAll();
-
-        for (Product i : everything) {
-            if (i.getProdDesc().contains(tagQuery)) {
-                taggedProducts.add(i);
-            }
-        }
-        return taggedProducts;
     }
 }
