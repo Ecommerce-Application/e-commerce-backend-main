@@ -9,6 +9,7 @@ import com.revature.models.Product;
 import com.revature.repositories.ProductRepository;
 import com.revature.services.ProductService;
 import com.revature.controllers.ProductController;
+import org.apache.coyote.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -48,8 +51,8 @@ class ProductControllerTest {
         this.testProdSer = new ProductService(testProdRep);
         this.testProdCon = new ProductController(testProdSer);
 
-        this.testProduct1 = new Product(10, 20.5, "someDesc", "someImage", "someName");
-        this.testProduct2 = new Product(10, 20.5, "someDesc", "someImage", "someName");
+        this.testProduct1 = new Product(20, 20.5, "someProdDesc", "someProdImage", "someProdName");
+        this.testProduct2 = new Product(15, 15.5, "someOtherDesc", "someOtherImage", "someOtherName");
 
         this.testProdList = new ArrayList<>();
         this.testProdList.add(testProduct1);
@@ -84,7 +87,6 @@ class ProductControllerTest {
         Product actual = (this.testProdCon.getProductById(testProduct1.getProdId())).getBody();
 
         assertEquals(expected, actual);
-        // verify(this.testProdCon, times(1)).getProductById(1);
     }
 
     @Test
@@ -100,39 +102,97 @@ class ProductControllerTest {
             // prove that the Exception thrown was indeed a ProductNotFoundException
             assertEquals(ProductNotFoundException.class, e.getClass());
         }
-        // verify(this.testProdSer, times(1)).findById(testProduct1.getProdId());
     }
 
     @Test
     void upsertProduct() {
-        // PUT map
-        // given(this.testProdSer.save(this.testProduct1)).willReturn((this.testProduct1));
-        // Product expected = this.testProduct1;
-        // Product actual = (this.testProdCon.upsertProduct(this.testProduct1)).getBody();
-
-        // assertEquals(expected, actual);
     }
 
     @Test
     void purchaseProduct_SUCCESS() {
-        // PATCH map
-        // given(this.testProdSer.findById(this.testProduct1.getProdId())).willReturn(Optional.of(this.testProduct1));
-
-        // this.testProdCon.purchaseProduct(this.testProdTO);
-
     }
 
     @Test
     void purchaseProduct_FAILURE_InvException() {
-        // PATCH map
-
     }
 
     @Test
     void deleteProduct() {
+
+        int prodID = this.testProduct1.getProdId();
+
+        given(this.testProdSer.findById(prodID)).willReturn(Optional.of(this.testProduct1));
+        ResponseEntity<Product> actual = this.testProdCon.deleteProduct(prodID);
+        ResponseEntity<Product> expected = ResponseEntity.of(Optional.of(this.testProduct1));
+
+        assertEquals(actual, expected);
+    }
+
+    //A note on polySearch()
+    //The function takes in an appended httpQuery from the request utilizing @RequestParam
+    //rivanman was unsure how exactly to pass that as an argument in the function, however everything else is outlined below for testing
+    @Test
+    void polyProductSearch_nameQuery() {
+//        String nameQuery = this.testProduct1.getProdName();
+//
+//        given(this.testProdSer.findByName(testProduct1.getProdName())).willReturn(Optional.of(this.testProdList));
+//
+//        Optional<List<Product>> expected = Optional.of(this.testProdList);
+//        Optional<List<Product>> actual = this.testProdCon.polyProductSearch(nameQuery);
+//
+//        assertEquals(expected, actual);
     }
 
     @Test
-    void polyProductSearch() {
+    void polyProductSearch_descQuery() {
+
+//        String descQuery = this.testProduct1.getProdDesc();
+//
+//        given(this.testProdSer.findByDescription(testProduct1.getProdDesc())).willReturn(Optional.of(this.testProdList));
+//
+//        Optional<List<Product>> expected = Optional.of(this.testProdList);
+//        Optional<List<Product>> actual = this.testProdCon.polyProductSearch(descQuery);
+//
+//        assertEquals(expected, actual);
+    }
+
+    @Test
+    void polyProductSearch_imageQuery() {
+
+//        String imageQuery = this.testProduct1.getProdImage();
+//
+//        given(this.testProdSer.findByImage(testProduct1.getProdImage())).willReturn(Optional.of(this.testProdList));
+//
+//        Optional<List<Product>> expected = Optional.of(this.testProdList);
+//        Optional<List<Product>> actual = this.testProdCon.polyProductSearch(imageQuery);
+//
+//        assertEquals(expected, actual);
+    }
+
+    @Test
+    void polyProductSearch_priceQuery() {
+
+//        double priceQuery = this.testProduct1.getProdPrice();
+//
+//        given(this.testProdSer.findByPrice(testProduct1.getProdPrice())).willReturn(Optional.of(this.testProdList));
+//
+//        Optional<List<Product>> expected = Optional.of(this.testProdList);
+//        Optional<List<Product>> actual = this.testProdCon.polyProductSearch(priceQuery);
+//
+//        assertEquals(expected, actual);
+    }
+
+    @Test
+    void polyProductSearch_priceRangeQuery() {
+
+//        double priceQueryRangeMin = 0;
+//        double priceQueryRangeMax = 100;
+//
+//        given(this.testProdSer.findByPriceRange(priceQueryRangeMin, priceQueryRangeMax)).willReturn(Optional.of(this.testProdList));
+//
+//        Optional<List<Product>> expected = Optional.of(this.testProdList);
+//        Optional<List<Product>> actual = this.testProdCon.polyProductSearch(priceQueryRangeMin, priceQueryRangeMax);
+//
+//        assertEquals(expected, actual);
     }
 }

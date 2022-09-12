@@ -111,6 +111,33 @@ class ProductServiceTests {
     }
 
     @Test
+    void findByName_StringCheck01() {
+        //Note: these functions could be shifted to a "helper" method in the service layer, which would make testing more logical
+        String prodName = "testName";
+
+        String prodNameMod01 = prodName.substring(0,1).toUpperCase() + prodName.substring(1).toLowerCase();
+
+        String expected = "Testname";
+        String actual = prodNameMod01;
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    void findByName_StringCheck02() {
+        String prodName = "testName";
+
+        String prodNameMod02 = prodName.substring(0,1).toUpperCase() + prodName.substring(1);
+
+        String expected = "TestName";
+        String actual = prodNameMod02;
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
     void findByDescription() {
         String desc = "someDesc";
         given(this.mockProdRepo.findByprodDesc(desc)).willReturn(Optional.of(this.dummyList));
