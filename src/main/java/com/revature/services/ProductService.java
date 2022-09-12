@@ -43,15 +43,16 @@ public class ProductService {
     // Special requests, new stuff
     // For loose-matched search function
 
-<<<<<<< Updated upstream
-    public Optional<List<Product>> findByName(String prodName) {
-        prodName = prodName.substring(0,1).toUpperCase() + prodName.substring(1).toLowerCase();
-        return productRepository.findByprodName(prodName);
-=======
+//<<<<<<< Updated upstream
+//    public Optional<List<Product>> findByName(String prodName) {
+//        prodName = prodName.substring(0, 1).toUpperCase() + prodName.substring(1).toLowerCase();
+//        return productRepository.findByprodName(prodName);
+//    }
+//=======
     //Calls the user-defined findByprodName method defined in the product repository layer
     public Optional<List<Product>> findByName(String name) {
         return productRepository.findByprodName(name);
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
     }
     //Calls the user-defined findByprodDesc method defined in the product repository layer
     public Optional<List<Product>> findByDescription(String descQuery) {

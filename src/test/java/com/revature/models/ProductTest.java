@@ -19,7 +19,7 @@ class ProductTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        this.dummyProd = new Product(1, 1, 1, "someDesc", "someImage", "someName");
+        this.dummyProd = new Product(1, 1, "someDesc", "someImage", "someName");
     }
 
     @AfterEach
