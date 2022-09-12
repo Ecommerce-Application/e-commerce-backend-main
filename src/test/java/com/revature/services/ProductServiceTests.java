@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ class ProductServiceTests {
 
     @BeforeEach
     void setUp() throws Exception {
-        this.dummyProd = new Product(1, 1, "someDesc", "someImage", "someName");
+        this.dummyProd = new Product(1, 1, "someDesc", "someImage", "Somename");
         // this.dummyProd2 = new Product(2, 1, 1, "someDesc2", "someImage2",
         // "someName2");
         this.dummyList.add(0, this.dummyProd);
@@ -83,11 +84,11 @@ class ProductServiceTests {
 
     @Test
     void findByName() {
-        String name = "someName";
-        given(this.mockProdRepo.findByprodName(name)).willReturn(Optional.of(this.dummyList));
+        String name = dummyProd.getProdName();
+        given(this.mockProdRepo.findByprodName(name)).willReturn(this.dummyList);
 
         Optional<List<Product>> expected = Optional.of(this.dummyList);
-        Optional<List<Product>> actual = this.pServ.findByName(name);
+        Optional<List<Product>> actual = this.pServ.findByName(dummyProd.getProdName());
 
         assertEquals(expected, actual);
 
@@ -95,10 +96,10 @@ class ProductServiceTests {
 
     @Test
     void findByName_Failure_ProductNotFoundException() {
-        String name = "anotherName";
+        String name = "Notaproduct";
 
         // when the service layer calls on the repo layer, it returns an empty Optional
-        given(this.mockProdRepo.findByprodName(name)).willReturn(Optional.empty());
+        given(this.mockProdRepo.findByprodName(name)).willReturn(Collections.emptyList());
 
         try {
             this.pServ.findByName(name);
