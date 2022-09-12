@@ -89,7 +89,7 @@ class TransactionServiceTest {
 
     @Test
     void add() {
-
+        this.fakeTransaction.setOrderQuantityBoughts(null);
         given(this.mockRepo.save(this.fakeTransaction)).willReturn(this.fakeTransaction);
         Transaction expected=this.fakeTransaction;
 
