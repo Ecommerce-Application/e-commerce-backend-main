@@ -7,6 +7,7 @@ import com.revature.models.OrderQuantityKey;
 import com.revature.models.Product;
 import com.revature.models.Transaction;
 import com.revature.repositories.TransactionRepo;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,43 +37,44 @@ class TransactionServiceTest {
 
     Transaction fakeTransaction;
     TransactionDto input;
-    OrderQuantityBought fakeQty;}
+    OrderQuantityBought fakeQty;
 
-    //@BeforeEach
-//    void setup(){
-//        List<OrderQuantityBought>list=new ArrayList<>();
-//        OrderQuantityKey key =new OrderQuantityKey(1,1);
-//        OrderQuantityBought ob =new OrderQuantityBought();
-//        TransactionQtyDTO tr=new TransactionQtyDTO(1,3);
-//        List<TransactionQtyDTO> list1 =new ArrayList<>();
-//        Product p=new Product();
-//        p.setProdId(1);
-//        p.setProdDesc("decc");
-//        p.setProdImage("image");
-//        p.setProdName("name");
-//        p.setProdPrice(19.95);
-//        p.setProdQuantity(100);
-//
-//
-//        this.fakeTransaction=new Transaction(1,1,20.2,20000,list);
-//        this.input=new TransactionDto(1,20.2,20000,list1);
-//
-//        ob.setTransactionId(fakeTransaction);
-//        ob.setQuantity(3);
-//        ob.setProductId(p);
-//        ob.setId(key);
-//       list.add(ob);
-//       //fakeTransaction.setOrderQuantityBoughts(list);
-//       input.getOrderQuantityBoughts().add(tr);
-//
-//
-//
-//    }}
+    @BeforeEach
+    void setup(){
+        List<OrderQuantityBought>list=new ArrayList<>();
+        OrderQuantityKey key =new OrderQuantityKey(1,1);
+        OrderQuantityBought ob =new OrderQuantityBought();
+        TransactionQtyDTO tr=new TransactionQtyDTO(1,3);
+        List<TransactionQtyDTO> list1 =new ArrayList<>();
+        Product p=new Product();
+        p.setProdId(1);
+        p.setProdDesc("decc");
+        p.setProdImage("image");
+        p.setProdName("name");
+        p.setProdPrice(19.95);
+        p.setProdQuantity(100);
 
 
-//    @Test
-//    void add() {
-//
+        this.fakeTransaction=new Transaction(1,1,20.2,20000,list);
+        this.input=new TransactionDto(1,20.2,20000,list1);
+
+        ob.setTransactionId(fakeTransaction);
+        ob.setQuantity(3);
+        ob.setProductId(p);
+        ob.setId(key);
+       list.add(ob);
+       //fakeTransaction.setOrderQuantityBoughts(list);
+       input.getOrderQuantityBoughts().add(tr);
+    }
+    @AfterEach
+    void teardown() {
+
+    this.fakeTransaction = null;
+    this.input = null;
+
+    }
+    @Test
+    void add() {
 //        given(this.mockRepo.save(this.fakeTransaction)).willReturn(this.fakeTransaction);
 //        Transaction expected=this.fakeTransaction;
 //
@@ -81,12 +83,10 @@ class TransactionServiceTest {
 //        assertEquals(expected.getTransactionId(),actual.getTransactionId());
 //
 //        verify(this.mockRepo,times(1)).save(this.fakeTransaction);
-//
-//    }
-//
-//    @Test
-//    void findByUserId() {
-//
+    }
+
+    @Test
+    void findByUserId() {
 //        Optional<List<Transaction>> actual=tranServiceMock.findByUserId(1);
-//    }
-//}
+    }
+}
