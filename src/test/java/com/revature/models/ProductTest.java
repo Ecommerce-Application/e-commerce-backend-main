@@ -28,31 +28,63 @@ class ProductTest {
     }
 
     @Test
-    void getById() {
+    void getProdId() {
 
-        // given(this.dummyProd.getProdId());
-        int expected = 1;
+        int expected = 0;
         int actual = this.dummyProd.getProdId();
 
         assertEquals(expected, actual);
     }
 
-    // @Test
-    // void getById_Failure() {
-    //
-    // //given(this.dummyProd.getProdId());
-    // int expected = 2;
-    // int actual = this.dummyProd.getProdId();
-    //
-    // try {
-    //
-    // } catch (Exception e) {
-    // // prove that the Exception thrown was indeed a ProductNotFoundException
-    // assertEquals(ProductNotFoundException.class, e.getClass());
-    // }
-    //
-    //
-    //
-    // }
+    @Test
+    void getProdQuantity() {
+    }
 
+    @Test
+    void getProdPrice() {
+    }
+
+    @Test
+    void getProdDesc() {
+    }
+
+    @Test
+    void getProdImage() {
+    }
+
+    @Test
+    void getProdName() {
+    }
+
+    @Test
+    void getQuantityBoughts() {
+    }
+
+    @Test
+    void setProdId() {
+    }
+
+    @Test
+    void setProdQuantity() {
+    }
+
+    @Test
+    void setProdPrice() {
+    }
+
+    @Test
+    void setProdDesc() {
+    }
+
+    @Test
+    void setProdImage() {
+    }
+
+    @Test
+    void setProdName() {
+    }
+
+    @Test
+    void setQuantityBoughts() {
+    }
 }
