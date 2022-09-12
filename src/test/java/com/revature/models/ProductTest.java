@@ -19,7 +19,7 @@ class ProductTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        this.dummyProd = new Product(1, 1, 1, "someDesc", "someImage", "someName");
+        this.dummyProd = new Product(1, 1, 1, "someDesc", "someImage", "someName", null);
     }
 
     @AfterEach
@@ -30,32 +30,29 @@ class ProductTest {
     @Test
     void getById() {
 
-        //given(this.dummyProd.getProdId());
+        // given(this.dummyProd.getProdId());
         int expected = 1;
         int actual = this.dummyProd.getProdId();
 
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    void getById_Failure() {
-//
-//        //given(this.dummyProd.getProdId());
-//        int expected = 2;
-//        int actual = this.dummyProd.getProdId();
-//
-//        try {
-//
-//        } catch (Exception e) {
-//            // prove that the Exception thrown was indeed a ProductNotFoundException
-//            assertEquals(ProductNotFoundException.class, e.getClass());
-//        }
-//
-//
-//
-//    }
-
-
-
+    // @Test
+    // void getById_Failure() {
+    //
+    // //given(this.dummyProd.getProdId());
+    // int expected = 2;
+    // int actual = this.dummyProd.getProdId();
+    //
+    // try {
+    //
+    // } catch (Exception e) {
+    // // prove that the Exception thrown was indeed a ProductNotFoundException
+    // assertEquals(ProductNotFoundException.class, e.getClass());
+    // }
+    //
+    //
+    //
+    // }
 
 }

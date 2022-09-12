@@ -34,7 +34,4 @@ public class Transaction {
     @JsonManagedReference
     private List<OrderQuantityBought> orderQuantityBoughts = new ArrayList<OrderQuantityBought>();
 
-
-
-
 }

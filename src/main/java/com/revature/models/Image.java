@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -26,7 +27,7 @@ public class Image {
     @Column(name = "pic_type")
     private String picType;
 
-    @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
     @Column(name = "pic_byte", length = 1000)
     private byte[] picByte;
 
