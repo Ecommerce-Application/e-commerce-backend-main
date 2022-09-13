@@ -1,9 +1,7 @@
 package com.revature.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -16,7 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Product {
 
-    // Explicit constructor
     public Product(int prodQuantity, double prodPrice, String prodDesc, String prodImage, String prodName) {
         this.prodQuantity = prodQuantity;
         this.prodPrice = prodPrice;

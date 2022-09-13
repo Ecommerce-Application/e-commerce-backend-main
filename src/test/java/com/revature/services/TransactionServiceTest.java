@@ -48,16 +48,14 @@ class TransactionServiceTest {
     OrderQuantityBought fakeQty;
     Transaction fake2;
 
-
-
     @BeforeEach
-    void setup(){
-        List<OrderQuantityBought>list=new ArrayList<>();
-        OrderQuantityKey key =new OrderQuantityKey(1,1);
-        OrderQuantityBought ob =new OrderQuantityBought();
-        TransactionQtyDTO tr=new TransactionQtyDTO(1,3);
-        List<TransactionQtyDTO> list1 =new ArrayList<>();
-        Product p=new Product();
+    void setup() {
+        List<OrderQuantityBought> list = new ArrayList<>();
+        OrderQuantityKey key = new OrderQuantityKey(1, 1);
+        OrderQuantityBought ob = new OrderQuantityBought();
+        TransactionQtyDTO tr = new TransactionQtyDTO(1, 3);
+        List<TransactionQtyDTO> list1 = new ArrayList<>();
+        Product p = new Product();
         p.setProdId(1);
         p.setProdDesc("decc");
         p.setProdImage("image");
@@ -65,46 +63,41 @@ class TransactionServiceTest {
         p.setProdPrice(19.95);
         p.setProdQuantity(100);
 
-
-        this.fakeTransaction=new Transaction(0,1,20.2,20000,null);
-        this.input=new TransactionDto(1,20.2,20000,list1);
+        this.fakeTransaction = new Transaction(0, 1, 20.2, 20000, null);
+        this.input = new TransactionDto(1, 20.2, 20000, list1);
 
         ob.setTransactionId(fakeTransaction);
         ob.setQuantity(3);
         ob.setProductId(p);
         ob.setId(key);
-       list.add(ob);
-       //this.fakeTransaction.setOrderQuantityBoughts(list);
-       //fakeTransaction.setOrderQuantityBoughts(list);
-       input.getOrderQuantityBoughts().add(tr);
+        list.add(ob);
+        // this.fakeTransaction.setOrderQuantityBoughts(list);
+        // fakeTransaction.setOrderQuantityBoughts(list);
+        input.getOrderQuantityBoughts().add(tr);
 
-       this.fake2=this.fakeTransaction;
-       fake2.setOrderQuantityBoughts(list);
-
-
-
+        this.fake2 = this.fakeTransaction;
+        fake2.setOrderQuantityBoughts(list);
 
     }
-
 
     @Test
     void add() {
         this.fakeTransaction.setOrderQuantityBoughts(null);
         given(this.mockRepo.save(this.fakeTransaction)).willReturn(this.fakeTransaction);
-        Transaction expected=this.fakeTransaction;
+        Transaction expected = this.fakeTransaction;
 
-        Transaction actual=tranServiceMock.add(this.input);
+        Transaction actual = tranServiceMock.add(this.input);
 
-        assertEquals(expected.getTransactionId(),actual.getTransactionId());
+        assertEquals(expected.getTransactionId(), actual.getTransactionId());
 
-        verify(this.mockRepo,times(1)).save(this.fakeTransaction);
+        verify(this.mockRepo, times(1)).save(this.fakeTransaction);
 
     }
 
-//    @Test
-//    void findByUserId() {
-//        //given(this.tranServiceMock.add(input)).willReturn()
-//
-//        Optional<List<Transaction>> actual=tranServiceMock.findByUserId(1);
-//    }
+    // @Test
+    // void findByUserId() {
+    // //given(this.tranServiceMock.add(input)).willReturn()
+    //
+    // Optional<List<Transaction>> actual=tranServiceMock.findByUserId(1);
+    // }
 }
