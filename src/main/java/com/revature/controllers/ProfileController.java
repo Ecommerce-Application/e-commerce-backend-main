@@ -28,22 +28,22 @@ import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("/profile")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000"}, allowCredentials = "true",
-        allowedHeaders = "*")
+@CrossOrigin(origins = { "http://localhost:4200",
+        "http://localhost:3000" }, allowCredentials = "true", allowedHeaders = "*")
 public class ProfileController {
     private UserService userService;
     private JwtTokenManager tokenManager;
     private ModelMapper modelMapper = new ModelMapper();
 
-//    Constructors
+    // Constructors
     @Autowired
     public ProfileController(UserService userService, JwtTokenManager tokenManager) {
         this.userService = userService;
         this.tokenManager = tokenManager;
     }
 
-//    Methods
-//    PROFILE
+    // Methods
+    // PROFILE
     @GetMapping
     public ResponseEntity<User> getUserBasicInfo(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -69,7 +69,7 @@ public class ProfileController {
 
     @GetMapping("/all")
     public ResponseEntity<Map<String, Object>> getAllUserInformation(HttpServletResponse response,
-                                                                     HttpServletRequest request) {
+            HttpServletRequest request) {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
@@ -106,10 +106,10 @@ public class ProfileController {
         }
     }
 
-//    PASSWORD
+    // PASSWORD
     @PatchMapping
     public ResponseEntity<User> setNewPassword(@Valid @RequestBody PasswordRequest passwordDTO,
-                                               HttpServletRequest request, HttpServletResponse response) {
+            HttpServletRequest request, HttpServletResponse response) {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
@@ -133,10 +133,10 @@ public class ProfileController {
         }
     }
 
-//    ADDRESS
+    // ADDRESS
     @PostMapping("/uaddress")
     public ResponseEntity<Address> addAddress(@Valid @RequestBody AddressRequest registerDTO,
-                                           HttpServletResponse response, HttpServletRequest request) {
+            HttpServletResponse response, HttpServletRequest request) {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
@@ -151,7 +151,7 @@ public class ProfileController {
         if (userService.getAddressById(userId) != null) {
             newAddress = userService.updateAddressById(address, userId);
         } else {
-            newAddress =  userService.addNewAddress(address, userId);
+            newAddress = userService.addNewAddress(address, userId);
         }
 
         if (newAddress != null) {
@@ -202,10 +202,10 @@ public class ProfileController {
         }
     }
 
-//    PAYMENT
+    // PAYMENT
     @PostMapping("/upayment")
     public ResponseEntity<Payment> addPayment(@Valid @RequestBody PaymentRequest paymentDTO,
-                                              HttpServletResponse response, HttpServletRequest request) {
+            HttpServletResponse response, HttpServletRequest request) {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
@@ -220,7 +220,7 @@ public class ProfileController {
         if (userService.getPaymentById(userId) != null) {
             newPayment = userService.updatePaymentById(payment, userId);
         } else {
-            newPayment =  userService.addNewPayment(payment, userId);
+            newPayment = userService.addNewPayment(payment, userId);
         }
 
         if (newPayment != null) {
@@ -272,11 +272,11 @@ public class ProfileController {
         return ResponseEntity.status(HttpStatus.OK).body(new Payment());
     }
 
-//    IMAGE
+    // IMAGE
     @PostMapping("/image")
     public ResponseEntity<Image> addImage(@RequestParam("imageFile") MultipartFile file,
-                                          HttpServletResponse response,
-                                          HttpServletRequest request) throws IOException {
+            HttpServletResponse response,
+            HttpServletRequest request) throws IOException {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
@@ -294,7 +294,7 @@ public class ProfileController {
         if (userService.getImageById(userId) != null) {
             newImage = userService.updateImageById(image, userId);
         } else {
-            newImage =  userService.addNewImage(image, userId);
+            newImage = userService.addNewImage(image, userId);
         }
 
         if (newImage != null) {
@@ -324,6 +324,7 @@ public class ProfileController {
             uncompressedImage.setPicName(currentImage.getPicName());
             uncompressedImage.setPicType(currentImage.getPicType());
             uncompressedImage.setPicByte(decompressBytes(currentImage.getPicByte()));
+            uncompressedImage.setPicId(currentImage.getPicId());
             response.addHeader("rolodex-token", request.getHeader("rolodex-token"));
             response.addHeader("Access-Control-Expose-Header", "rolodex-token");
             return ResponseEntity.status(HttpStatus.OK).body(uncompressedImage);
@@ -336,7 +337,7 @@ public class ProfileController {
 
     @DeleteMapping("/image")
     public ResponseEntity<Image> deleteImage(HttpServletResponse response,
-                                             HttpServletRequest request) throws IOException {
+            HttpServletRequest request) throws IOException {
         try {
             userService.validateSession(request.getHeader("rolodex-token"));
         } catch (UnauthorizedSessionException e) {
@@ -357,8 +358,8 @@ public class ProfileController {
         }
     }
 
-//        HELP METHODS
-//    TO COMPRESS IMAGE BYTES BEFORE STORING INTO DB
+    // HELP METHODS
+    // TO COMPRESS IMAGE BYTES BEFORE STORING INTO DB
     public static byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
@@ -378,8 +379,7 @@ public class ProfileController {
         return outputStream.toByteArray();
     }
 
-
-//      UNCOMPRESS IMAGE BYTES BEFORE RETURNING INTO ANGULAR APPLICATION
+    // UNCOMPRESS IMAGE BYTES BEFORE RETURNING INTO ANGULAR APPLICATION
     public static byte[] decompressBytes(byte[] data) {
         Inflater inflater = new Inflater();
         inflater.setInput(data);
