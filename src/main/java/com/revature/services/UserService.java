@@ -117,16 +117,16 @@ public class UserService {
 
     //    PAYMENT
     @Transactional
-    public Payment updatePaymentById(Payment address, int userId) {
-        Optional<Payment> updatedPayment = paymentRepository.updatePaymentById(address.getCcNumber(),
-                address.getExpPeriod(), address.getSvcCode(), address.getZipCode(), userId);
+    public Payment updatePaymentById(Payment payment, int userId) {
+        Optional<Payment> updatedPayment = paymentRepository.updatePaymentById(payment.getCcNumber(),
+                payment.getExpPeriod(), payment.getSvcCode(), payment.getZipCode(), userId);
         return updatedPayment.orElse(null);
     }
 
     @Transactional
-    public Payment addNewPayment(Payment address, int userId) {
-        Optional<Payment> addedPayment = paymentRepository.addNewPayment(address.getCcNumber(),
-                address.getExpPeriod(), address.getSvcCode(), address.getZipCode(), userId);
+    public Payment addNewPayment(Payment payment, int userId) {
+        Optional<Payment> addedPayment = paymentRepository.addNewPayment(payment.getCcNumber(),
+                payment.getExpPeriod(), payment.getSvcCode(), payment.getZipCode(), userId);
         return addedPayment.orElse(null);
     }
 
