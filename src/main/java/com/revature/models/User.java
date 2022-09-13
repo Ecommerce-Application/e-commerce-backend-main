@@ -16,11 +16,10 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@Data
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class User {
@@ -50,7 +49,6 @@ public class User {
     @Column(name = "token_id")
     private String tokenId;
 
-
 // One-To-Many Relationships
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
@@ -63,4 +61,14 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Payment> payments = new ArrayList<>();
+
+    // Constructor used for Wish testing
+    public User(int userId, String userEmail, String userPassword, String firstName, String lastName, String tokenId) {
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.tokenId = tokenId;
+    }
 }
