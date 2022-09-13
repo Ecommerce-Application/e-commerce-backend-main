@@ -5,10 +5,7 @@ import com.revature.models.Product;
 import com.revature.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -42,10 +39,21 @@ public class ProductService {
     // Special requests, new stuff
     // For loose-matched search function
 
-    // Calls the user-defined findByprodName method defined in the product
-    // repository layer
-    public Optional<List<Product>> findByName(String name) {
-        return productRepository.findByprodName(name);
+    public Optional<List<Product>> findByName(String prodName) {
+        //SQL queries are case-sensitive, rather than calling the entire repository into this space and running a case-insensitive query...
+        //Takes string prodName and performs a few basic modifications, then if(prodList) is not populated, runs additional search queries to the repository
+        String prodNameMod01 = prodName.substring(0,1).toUpperCase() + prodName.substring(1).toLowerCase();
+        String prodNameMod02 = prodName.substring(0,1).toUpperCase() + prodName.substring(1);
+        List<Product> prodList = productRepository.findByprodName(prodName);
+        if(prodList.isEmpty()) {
+            //prodNameMod01 capitalizes first letter and de-capitalizes the rest of the string
+            prodList = productRepository.findByprodName(prodNameMod01);
+            if(prodList.isEmpty()) {
+                //prodNameMod02 only capitalizes the first letter
+                prodList = productRepository.findByprodName(prodNameMod02);
+            }
+        }
+        return Optional.of(prodList);
     }
 
     // Calls the user-defined findByprodDesc method defined in the product
@@ -64,5 +72,9 @@ public class ProductService {
     // repository layer
     public Optional<List<Product>> findByPrice(double priceQuery) {
         return productRepository.findByprodPrice(priceQuery);
+    }
+
+    public Optional<List<Product>> findByPriceRange(double priceMin, double priceMax) {
+        return productRepository.findByprodPrice(priceMin, priceMax);
     }
 }
