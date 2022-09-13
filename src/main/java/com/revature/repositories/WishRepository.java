@@ -22,10 +22,12 @@ public interface WishRepository extends JpaRepository<Wish, WishKey> {
 
     Optional<Wish> findByUserIdAndProductId(int userId, int productId);
 
+    // This is a custom query for deleting a single wish using the user and product IDs.
     @Modifying
     @Query("DELETE Wish w WHERE w.userId = :userId AND w.productId = :productId")
     int deleteWishByWishKey(@Param("userId") int userId, @Param("productId") int productId);
 
+    // This is a custom query for deleting all wishes using the user ID.
     @Modifying
     @Query("DELETE Wish w WHERE w.userId = :userId")
     int deleteAllWishes(@Param("userId") int userId);
