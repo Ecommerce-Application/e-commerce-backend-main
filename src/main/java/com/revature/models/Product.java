@@ -37,4 +37,10 @@ public class Product {
     @OneToMany(mappedBy = "productId")
     @JsonIgnore
     private List<OrderQuantityBought> quantityBoughts;
+
+    // Constructor for Wish testing purposes
+    public Product(int prodId, String prodName) {
+        this.prodId = prodId;
+        this.prodName = prodName;
+    }
 }
