@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -30,6 +31,7 @@ public class AddressRequest {
     private String street;
 
     @NotBlank
+    @Length(min = 5)
     @Pattern(regexp = "^[\\d]+$")
     private String zipCode;
 }
