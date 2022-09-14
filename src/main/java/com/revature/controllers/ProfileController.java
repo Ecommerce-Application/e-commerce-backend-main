@@ -29,7 +29,7 @@ import java.util.zip.Inflater;
 @RestController
 @RequestMapping("/profile")
 @CrossOrigin(origins = { "http://localhost:4200",
-        "http://localhost:3000" }, allowCredentials = "true", allowedHeaders = "*")
+        "http://localhost:3000", "http://e-commerce-shrooster.s3-website-us-east-1.amazonaws.com" }, allowCredentials = "true", allowedHeaders = "*")
 public class ProfileController {
     private UserService userService;
     private JwtTokenManager tokenManager;

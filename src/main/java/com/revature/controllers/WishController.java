@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000",
-        "http://localhost:5000" }, allowedHeaders = "*")
+        "http://localhost:5000", "http://e-commerce-shrooster.s3-website-us-east-1.amazonaws.com" }, allowedHeaders = "*")
 @RequestMapping("/wish")
 public class WishController {
 
