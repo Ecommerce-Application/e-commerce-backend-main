@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"prodQuantity\": 10,\r\n    \"prodPrice\":  19.99,\r\n    \"prodDesc\":  \"This chicken ain't so chicken. A conversation piece for your western-themed decor\",\r\n    \"prodImage\": \"https://ucarecdn.com/6723658a-6baf-449a-888f-3ec97b36fd27/fda.jpeg\",\r\n    \"prodName\": \"Cluckin' Cowboy\"\r\n}",
+									"raw": "{\r\n    \"prodQuantity\": 10,\r\n    \"prodPrice\":  19.99,\r\n    \"prodDesc\":  \"This chicken ain't so chicken. A conversation piece for your western-themed decor\",\r\n    \"prodImage\": \"https://ucarecdn.com/cd4b6273-017a-4bc2-b905-4b6c7444b370/fda.jpeg\",\r\n    \"prodName\": \"Cluckin' Cowboy\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -48,7 +48,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"prodQuantity\": 8,\r\n    \"prodPrice\":  29.99,\r\n    \"prodDesc\":  \"When you've gotta be delicious and dance at the same time.\",\r\n    \"prodImage\": \"https://ucarecdn.com/837bcbff-2c6e-420a-99d8-36f613ae33a1/sss.jpeg\",\r\n    \"prodName\": \"Tutu to Tim'cluck'tu\"\r\n}",
+									"raw": "{\r\n    \"prodQuantity\": 8,\r\n    \"prodPrice\":  29.99,\r\n    \"prodDesc\":  \"When you've gotta be delicious and dance at the same time.\",\r\n    \"prodImage\": \"https://ucarecdn.com/d7ea17c6-7eef-4e07-a2f0-0db3d0c7ecc9/sss.jpeg\",\r\n    \"prodName\": \"Tutu to Tim'cluck'tu\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -77,7 +77,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"prodQuantity\": 27,\r\n    \"prodPrice\":  14.99,\r\n    \"prodDesc\":  \"A plushy friend to roost on your head.\",\r\n    \"prodImage\": \"https://ucarecdn.com/dc22e6bb-fa1f-48db-aeb1-2709830e81fb/chickenHat.jpeg\",\r\n    \"prodName\": \"Head Roost'r\"\r\n}",
+									"raw": "{\r\n    \"prodQuantity\": 27,\r\n    \"prodPrice\":  15.00,\r\n    \"prodDesc\":  \"A plushy friend to roost on your head.\",\r\n    \"prodImage\": \"https://ucarecdn.com/2c92e404-66d3-425e-9a7f-77fe1ee04eac/chickenHat.jpeg\",\r\n    \"prodName\": \"Head Roost'r\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -106,7 +106,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"prodQuantity\": 2,\r\n    \"prodPrice\":  49.99,\r\n    \"prodDesc\":  \"Shoes- not just shoes, stilletos with BEAKS!\",\r\n    \"prodImage\": \"https://ucarecdn.com/330ae62d-671a-446e-8005-8a39ad511ccc/dvbgh.jpeg\",\r\n    \"prodName\": \"Stilbeakos\"\r\n}",
+									"raw": "{\r\n    \"prodQuantity\": 2,\r\n    \"prodPrice\":  49.99,\r\n    \"prodDesc\":  \"Shoes- not just shoes, stilletos with BEAKS!\",\r\n    \"prodImage\": \"https://ucarecdn.com/b7959b5e-0e13-4d5c-bbad-9da724a14728/dvbgh.jpeg\",\r\n    \"prodName\": \"Stilbeakos\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -135,7 +135,94 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"prodQuantity\": 12,\r\n    \"prodPrice\":  4.99,\r\n    \"prodDesc\":  \"This apron will keep both you AND your chicken safe in the kitchen, pen, or range.\",\r\n    \"prodImage\": \"https://ucarecdn.com/d9042a1f-963e-4b12-a906-5eff9bcad688/HenApronChickenSaddleBackProtectortoPromoteFeatherRegrowthforPoultryjpg_Q90jpg_.webp\",\r\n    \"prodName\": \"The Poultry Protector\"\r\n}",
+									"raw": "{\r\n    \"prodQuantity\": 12,\r\n    \"prodPrice\":  5.00,\r\n    \"prodDesc\":  \"This apron will keep both you AND your chicken safe in the kitchen, pen, or range.\",\r\n    \"prodImage\": \"https://ucarecdn.com/d9042a1f-963e-4b12-a906-5eff9bcad688/HenApronChickenSaddleBackProtectortoPromoteFeatherRegrowthforPoultryjpg_Q90jpg_.webp\",\r\n    \"prodName\": \"The Poultry Protector\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/prod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"prod"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Chick'veralls",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"prodQuantity\": 12,\r\n    \"prodPrice\":  4.99,\r\n    \"prodDesc\":  \"For the hardworking chickman.\",\r\n    \"prodImage\": \"https://ucarecdn.com/5d129ea0-0a36-4935-b732-ee095c89236d/over.jpeg\",\r\n    \"prodName\": \"Chick'veralls\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/prod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"prod"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buffin",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"prodQuantity\": 1,\r\n    \"prodPrice\":  4.99,\r\n    \"prodDesc\":  \"The Strongest chicken in the world. We only have one.\",\r\n    \"prodImage\": \"https://ucarecdn.com/b51a50aa-5a99-4361-8cc7-0376a91df5a6/hilarious.jpg\",\r\n    \"prodName\": \"Buff'kin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/prod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"prod"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Chickn'Runks",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"prodQuantity\": 12,\r\n    \"prodPrice\":  7.99,\r\n    \"prodDesc\":  \"Pool party? Beach? All is fair game for the Chickn'Runks.\",\r\n    \"prodImage\": \"https://ucarecdn.com/b8dffbbe-e974-4fb5-98d1-4cba39071033/image.png\",\r\n    \"prodName\": \"Chickn'Runks\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

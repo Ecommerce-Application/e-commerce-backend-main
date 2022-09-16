@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+    @Query("FROM Product WHERE prodDesc LIKE %:prodDesc%") 
     Optional<List<Product>> findByprodDesc(String prodDesc);
     //Uses pattern matching to find products based on partial character matches in prodDesc field
 
